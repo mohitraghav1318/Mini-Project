@@ -4,7 +4,7 @@ export const isValidEmail = (email) => {
 };
 
 export const isValidPassword = (password) => {
-  // Minimum 8 chars, at least one letter and one number
+  
   return typeof password === "string" && password.length >= 8;
 };
 

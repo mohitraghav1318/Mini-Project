@@ -55,7 +55,6 @@ export const loginUser = asyncHandler(async (req, res) => {
 });
 
 export const getCurrentUser = asyncHandler(async (req, res) => {
-  // req.user is already the full safe user object, attached by `protect` middleware
   return res.status(200).json({
     success: true,
     data: req.user,

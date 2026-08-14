@@ -33,8 +33,6 @@ export const createUser = async ({ name, email, password }) => {
 export const validateUserCredentials = async (email, password) => {
   const user = await findUserByEmail(email);
 
-  // Deliberately vague error — don't reveal whether it was the email or password that was wrong.
-  // This prevents attackers from using your login endpoint to enumerate valid emails.
   if (!user) {
     throw new ApiError(401, "Invalid email or password.");
   }
@@ -44,7 +42,7 @@ export const validateUserCredentials = async (email, password) => {
     throw new ApiError(401, "Invalid email or password.");
   }
 
-  // Strip password before returning
+  
   const { password: _, ...safeUser } = user;
   return safeUser;
 };
