@@ -1,4 +1,7 @@
 import "dotenv/config";
+import dns from "node:dns";
+dns.setDefaultResultOrder("ipv4first");
+
 import { defineConfig, env } from "prisma/config";
 
 export default defineConfig({

@@ -2,6 +2,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { verifyToken } from "../utils/jwt.js";
 import prisma from "../config/db.js";
+import { SAFE_USER_SELECT } from "../services/user.service.js";
 
 export const protect = asyncHandler(async (req, res, next) => {
   const token = req.cookies?.token;
@@ -19,13 +20,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 
   const user = await prisma.user.findUnique({
     where: { id: decoded.userId },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-      createdAt: true,
-    },
+    select: SAFE_USER_SELECT,
   });
 
   if (!user) {
