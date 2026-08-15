@@ -4,8 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "dev": "NODE_OPTIONS=--dns-result-order=ipv4first nodemon src/server.js",
+    "start": "node src/server.js",
+    "prisma": "NODE_OPTIONS=--dns-result-order=ipv4first prisma"
   },
   "keywords": [],
   "author": "",
