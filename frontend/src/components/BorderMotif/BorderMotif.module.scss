@@ -1,0 +1,19 @@
+.motif {
+  height: 14px;
+  width: 100%;
+  background-color: var(--color-indigo);
+  background-image:
+    linear-gradient(135deg, var(--color-marigold) 25%, transparent 25%),
+    linear-gradient(225deg, var(--color-marigold) 25%, transparent 25%);
+  background-position: 0 0;
+  background-size: 18px 14px;
+
+  @media (min-width: 640px) {
+    height: 18px;
+    background-size: 22px 18px;
+  }
+}
+
+.flip {
+  transform: scaleY(-1);
+}

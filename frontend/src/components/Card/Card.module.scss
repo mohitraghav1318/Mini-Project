@@ -1,0 +1,12 @@
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+
+  @media (min-width: 640px) {
+    padding: 2.5rem;
+  }
+}

@@ -1,0 +1,25 @@
+:root {
+  // Brand palette — village block-print / dye inspired
+  --color-bg: #faf3e6;
+  --color-surface: #ffffff;
+  --color-ink: #2b2620;
+  --color-indigo: #24446b;
+  --color-indigo-deep: #16283f;
+  --color-marigold: #e2a33d;
+  --color-alta: #a13d3d;
+  --color-leaf: #5c7a52;
+
+  // Semantic aliases (use these in components instead of raw colors above)
+  --color-border: rgba(43, 38, 32, 0.12);
+  --color-error: #a13d3d;
+  --color-success: #5c7a52;
+
+  // Radius scale
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-pill: 999px;
+
+  // Shadow scale
+  --shadow-sm: 0 2px 10px rgba(43, 38, 32, 0.06);
+  --shadow-md: 0 10px 24px rgba(43, 38, 32, 0.1);
+}

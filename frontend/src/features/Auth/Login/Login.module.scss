@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: var(--color-indigo-deep);
+  margin-bottom: 0.25rem;
+}
+
+.footerText {
+  font-size: 0.9rem;
+  text-align: center;
+  opacity: 0.85;
+  margin-top: 0.5rem;
+}
+
+.footerLink {
+  color: var(--color-indigo);
+  font-weight: 600;
+}

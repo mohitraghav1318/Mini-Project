@@ -1,0 +1,276 @@
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-surface);
+
+  @media (min-width: 1024px) {
+    padding: 1.5rem 4rem;
+  }
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--color-indigo);
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.navCta {
+  background: var(--color-indigo);
+  color: var(--color-bg);
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(36, 68, 107, 0.25);
+  }
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  padding: 2.5rem 1.5rem 3rem;
+  text-align: center;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    text-align: left;
+    padding: 4rem 4rem 5rem;
+    gap: 3rem;
+  }
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeUp 0.6s ease both;
+
+  @media (min-width: 1024px) {
+    flex: 1;
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: var(--color-indigo-deep);
+
+    @media (min-width: 640px) {
+      font-size: 2.6rem;
+    }
+    @media (min-width: 1024px) {
+      font-size: 3.2rem;
+    }
+  }
+
+  p {
+    font-size: 1.05rem;
+    max-width: 42ch;
+    opacity: 0.85;
+  }
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-alta);
+  font-weight: 600;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+
+  @media (min-width: 1024px) {
+    justify-content: flex-start;
+  }
+}
+
+.primaryButton {
+  background: var(--color-marigold);
+  color: var(--color-indigo-deep);
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(226, 163, 61, 0.35);
+  }
+}
+
+.secondaryButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-indigo);
+  color: var(--color-indigo);
+  font-weight: 600;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgba(36, 68, 107, 0.08);
+  }
+}
+
+.heroGraphic {
+  width: 160px;
+  animation: fadeUp 0.6s ease 0.15s both;
+
+  @media (min-width: 1024px) {
+    flex: 1;
+    max-width: 280px;
+  }
+}
+
+.pillars {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem 1.5rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 3rem 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 3rem 4rem;
+    gap: 2rem;
+  }
+}
+
+.pillarCard {
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 2px 10px rgba(43, 38, 32, 0.06);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.15s ease;
+
+  &.isVisible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    box-shadow: 0 10px 24px rgba(43, 38, 32, 0.1);
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    color: var(--color-indigo-deep);
+  }
+
+  p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+}
+
+.pillarIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-indigo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pointsBanner {
+  background: var(--color-indigo-deep);
+  color: var(--color-bg);
+  text-align: center;
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+
+  &.isVisible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    color: var(--color-marigold);
+  }
+
+  p {
+    max-width: 52ch;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 4rem 2rem;
+  }
+}
+
+.ctaBand {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+
+  h2 {
+    font-size: 1.6rem;
+    color: var(--color-indigo-deep);
+  }
+}
+
+.footer {
+  background: var(--color-surface);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.copyright {
+  opacity: 0.6;
+  font-size: 0.8rem;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

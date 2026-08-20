@@ -1,0 +1,24 @@
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--color-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  opacity: 0.7;
+}
+
+.value {
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  text-align: right;
+}
