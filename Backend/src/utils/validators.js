@@ -36,3 +36,34 @@ export const validateLoginInput = ({ email, password }) => {
 
   return errors;
 };
+
+
+// Validates a profile update request.
+// Unlike onboarding, ALL fields are optional here — user may update
+// just one field (e.g. only "bio") without sending the rest.
+// We only check the type/shape of fields that are actually present.
+export function validateProfileUpdateInput({ bio, district, state, workPreference, interestIds }) {
+  const errors = [];
+
+  if (bio !== undefined && typeof bio !== "string") {
+    errors.push("Bio must be text.");
+  }
+
+  if (district !== undefined && typeof district !== "string") {
+    errors.push("District must be text.");
+  }
+
+  if (state !== undefined && typeof state !== "string") {
+    errors.push("State must be text.");
+  }
+
+  if (workPreference !== undefined && typeof workPreference !== "string") {
+    errors.push("Work preference must be text.");
+  }
+
+  if (interestIds !== undefined && !Array.isArray(interestIds)) {
+    errors.push("interestIds must be an array of interest IDs.");
+  }
+
+  return errors;
+}

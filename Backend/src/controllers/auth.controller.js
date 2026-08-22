@@ -5,6 +5,8 @@ import { createUser, validateUserCredentials } from "../services/auth.service.js
 import { generateToken } from "../utils/jwt.js";
 import { getCookieOptions } from "../utils/cookieOptions.js";
 
+
+// register controller
 export const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -28,6 +30,7 @@ export const registerUser = asyncHandler(async (req, res) => {
   });
 });
 
+// login controoler
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -54,6 +57,8 @@ export const loginUser = asyncHandler(async (req, res) => {
   });
 });
 
+
+// get curr user 
 export const getCurrentUser = asyncHandler(async (req, res) => {
   return res.status(200).json({
     success: true,
@@ -61,6 +66,8 @@ export const getCurrentUser = asyncHandler(async (req, res) => {
   });
 });
 
+
+// logout curre user
 export const logoutUser = asyncHandler(async (req, res) => {
   res.clearCookie("token", getCookieOptions());
   return res.status(200).json({
