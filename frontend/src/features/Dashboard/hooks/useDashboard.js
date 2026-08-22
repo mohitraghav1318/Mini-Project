@@ -43,5 +43,5 @@ export function useDashboard() {
     }
   }
 
-  return { user, isLoading, isLoggingOut, handleLogout };
+  return { user, isLoading, isLoggingOut, handleLogout, setUser };
 }

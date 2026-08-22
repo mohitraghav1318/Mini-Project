@@ -5,8 +5,8 @@ import prisma from "../config/db.js";
 import { SAFE_USER_SELECT } from "../services/user.service.js";
 
 export const protect = asyncHandler(async (req, res, next) => {
-  console.log("RAW COOKIE HEADER:", req.headers.cookie);
-  console.log("PARSED COOKIES:", req.cookies);
+  // console.log("RAW COOKIE HEADER:", req.headers.cookie);
+  // console.log("PARSED COOKIES:", req.cookies);
   const token = req.cookies?.token;
 
   if (!token) {
