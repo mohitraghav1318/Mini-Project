@@ -7,7 +7,7 @@ import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import FormMessage from "@/components/FormMessage/FormMessage";
 import styles from "./ResetPassword.module.scss";
-import { resetPasswordData } from "./data/resetPassword.data";
+import { resetPasswordData } from "./data/resetPassword.js";
 import { useResetPassword } from "./hooks/useResetPassword";
 
 export default function ResetPassword() {
