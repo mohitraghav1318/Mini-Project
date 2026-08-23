@@ -22,9 +22,15 @@ export const loginData = {
     ],
     submitLabel: "Log in",
   },
+  forgotPassword: {
+    text: "Forgot your password?",
+    linkHref: "/forgot-password",
+  },
   footer: {
     text: "Don't have an account?",
     linkLabel: "Create one",
     linkHref: "/register",
   },
 };
+
+

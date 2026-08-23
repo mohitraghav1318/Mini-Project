@@ -18,7 +18,7 @@ export function useDashboard() {
       try {
         const data = await getCurrentUser();
         // adjust if your /me response isn't wrapped as { user: {...} }
-        if (isMounted) setUser(data.user ?? data);
+        if (isMounted) setUser(data.data);
       } catch (err) {
         if (isMounted) router.push("/login");
       } finally {
@@ -43,5 +43,5 @@ export function useDashboard() {
     }
   }
 
-  return { user, isLoading, isLoggingOut, handleLogout };
+  return { user, isLoading, isLoggingOut, handleLogout, setUser };
 }
