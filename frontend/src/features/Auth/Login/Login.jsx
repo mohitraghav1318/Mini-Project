@@ -33,8 +33,14 @@ export default function Login() {
           ))}
 
           <Button type="submit" isLoading={isSubmitting} fullWidth>
-            {loginData.form.submitLabel}
-          </Button>
+  {loginData.form.submitLabel}
+</Button>
+
+<p className={styles.forgotPasswordText}>
+  <Link href={loginData.forgotPassword.linkHref} className={styles.footerLink}>
+    {loginData.forgotPassword.text}
+  </Link>
+</p>
 
           <p className={styles.footerText}>
             {loginData.footer.text}{" "}

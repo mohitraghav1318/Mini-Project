@@ -15,6 +15,7 @@
     "sass": "^1.102.0"
   },
   "devDependencies": {
+    "@types/react": "19.2.18",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.3.1"
