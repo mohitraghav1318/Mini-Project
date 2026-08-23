@@ -8,20 +8,23 @@ datasource db {
 }
 
 model User {
-  id             Int        @id @default(autoincrement())
-  name           String
-  email          String     @unique
-  password       String
-  role           String     @default("STUDENT")
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
-  bio            String?
-  district       String?
-  onboarded      Boolean    @default(false)
-  points         Int        @default(0)
-  state          String?
-  workPreference String?
-  interests      Interest[] @relation("UserInterests")
+  id               Int        @id @default(autoincrement())
+  name             String
+  email            String     @unique
+  password         String
+  role             String     @default("STUDENT")
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  bio              String?
+  district         String?
+  onboarded        Boolean    @default(false)
+  points           Int        @default(0)
+  state            String?
+  workPreference   String?
+  interests        Interest[] @relation("UserInterests")
+  resetTokenHash   String?
+  resetTokenExpiry DateTime?
+  tokenVersion     Int        @default(0)
 }
 
 model Interest {

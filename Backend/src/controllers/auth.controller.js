@@ -4,6 +4,8 @@ import { validateRegisterInput, validateLoginInput } from "../utils/validators.j
 import { createUser, validateUserCredentials } from "../services/auth.service.js";
 import { generateToken } from "../utils/jwt.js";
 import { getCookieOptions } from "../utils/cookieOptions.js";
+import { validateForgotPasswordInput, validateResetPasswordInput } from "../utils/validators.js";
+import { requestPasswordReset, resetPassword as resetPasswordService } from "../services/auth.service.js";
 
 
 // register controller
@@ -41,11 +43,12 @@ export const loginUser = asyncHandler(async (req, res) => {
 
   const normalizedEmail = email.trim().toLowerCase();
 
-  const user = await validateUserCredentials(normalizedEmail, password);
+  const { safeUser, tokenVersion } = await validateUserCredentials(normalizedEmail, password);
 
   const token = generateToken({
-    userId: user.id,
-    role: user.role,
+    userId: safeUser.id,
+    role: safeUser.role,
+    tokenVersion,
   });
 
   res.cookie("token", token, getCookieOptions());
@@ -53,7 +56,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   return res.status(200).json({
     success: true,
     message: "Logged in successfully.",
-    data: user,
+    data: safeUser,
   });
 });
 
@@ -73,5 +76,44 @@ export const logoutUser = asyncHandler(async (req, res) => {
   return res.status(200).json({
     success: true,
     message: "Logged out successfully.",
+  });
+});
+
+
+// forgot password controller
+export const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  const validationErrors = validateForgotPasswordInput({ email });
+  if (validationErrors.length > 0) {
+    throw new ApiError(400, "Validation failed", validationErrors);
+  }
+
+  const normalizedEmail = email.trim().toLowerCase();
+
+  await requestPasswordReset(normalizedEmail);
+
+  // Always the same response, whether or not the email exists —
+  // prevents attackers from figuring out which emails are registered.
+  return res.status(200).json({
+    success: true,
+    message: "If an account with that email exists, a reset link has been sent.",
+  });
+});
+
+// reset password controller
+export const resetPassword = asyncHandler(async (req, res) => {
+  const { token, newPassword } = req.body;
+
+  const validationErrors = validateResetPasswordInput({ token, newPassword });
+  if (validationErrors.length > 0) {
+    throw new ApiError(400, "Validation failed", validationErrors);
+  }
+
+  await resetPasswordService(token, newPassword);
+
+  return res.status(200).json({
+    success: true,
+    message: "Password reset successfully. Please log in with your new password.",
   });
 });

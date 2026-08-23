@@ -67,3 +67,26 @@ export function validateProfileUpdateInput({ bio, district, state, workPreferenc
 
   return errors;
 }
+
+export const validateForgotPasswordInput = ({ email }) => {
+  const errors = [];
+
+  if (!email || !isValidEmail(email)) {
+    errors.push("A valid email is required.");
+  }
+
+  return errors;
+};
+
+export const validateResetPasswordInput = ({ token, newPassword }) => {
+  const errors = [];
+
+  if (!token || typeof token !== "string") {
+    errors.push("A valid reset token is required.");
+  }
+  if (!newPassword || !isValidPassword(newPassword)) {
+    errors.push("Password must be at least 8 characters long.");
+  }
+
+  return errors;
+};
