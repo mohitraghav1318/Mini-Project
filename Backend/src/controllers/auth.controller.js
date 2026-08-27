@@ -7,12 +7,11 @@ import { getCookieOptions } from "../utils/cookieOptions.js";
 import { validateForgotPasswordInput, validateResetPasswordInput } from "../utils/validators.js";
 import { requestPasswordReset, resetPassword as resetPasswordService } from "../services/auth.service.js";
 
-
 // register controller
 export const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, shgName, district, state, occupation } = req.body;
 
-  const validationErrors = validateRegisterInput({ name, email, password });
+  const validationErrors = validateRegisterInput(req.body);
   if (validationErrors.length > 0) {
     throw new ApiError(400, "Validation failed", validationErrors);
   }
@@ -23,16 +22,29 @@ export const registerUser = asyncHandler(async (req, res) => {
     name: name.trim(),
     email: normalizedEmail,
     password,
+    shgName: shgName.trim(),
+    district: district.trim(),
+    state: state.trim(),
+    occupation,
   });
+
+  // Auto-login on register — new user always starts at tokenVersion 0 (schema default)
+  const token = generateToken({
+    userId: user.id,
+    role: user.role,
+    tokenVersion: 0,
+  });
+
+  res.cookie("token", token, getCookieOptions());
 
   return res.status(201).json({
     success: true,
-    message: "Account created successfully. Please log in.",
+    message: "Account created successfully.",
     data: user,
   });
 });
 
-// login controoler
+// login controller
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -60,8 +72,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   });
 });
 
-
-// get curr user 
+// get current user
 export const getCurrentUser = asyncHandler(async (req, res) => {
   return res.status(200).json({
     success: true,
@@ -69,8 +80,7 @@ export const getCurrentUser = asyncHandler(async (req, res) => {
   });
 });
 
-
-// logout curre user
+// logout current user
 export const logoutUser = asyncHandler(async (req, res) => {
   res.clearCookie("token", getCookieOptions());
   return res.status(200).json({
@@ -78,7 +88,6 @@ export const logoutUser = asyncHandler(async (req, res) => {
     message: "Logged out successfully.",
   });
 });
-
 
 // forgot password controller
 export const forgotPassword = asyncHandler(async (req, res) => {
@@ -93,8 +102,6 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
   await requestPasswordReset(normalizedEmail);
 
-  // Always the same response, whether or not the email exists —
-  // prevents attackers from figuring out which emails are registered.
   return res.status(200).json({
     success: true,
     message: "If an account with that email exists, a reset link has been sent.",
