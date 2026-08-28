@@ -1,0 +1,20 @@
+{
+  "AGRICULTURE": "Agriculture",
+  "DAIRY_FARMING": "Dairy Farming",
+  "POULTRY_FARMING": "Poultry Farming",
+  "GOAT_SHEEP_REARING": "Goat & Sheep Rearing",
+  "TAILORING_EMBROIDERY": "Tailoring & Embroidery",
+  "HANDICRAFTS": "Handicrafts",
+  "WEAVING": "Weaving",
+  "BASKET_MAKING": "Basket Making",
+  "POTTERY": "Pottery",
+  "PAPAD_PICKLE_MAKING": "Papad & Pickle Making",
+  "FOOD_PROCESSING_CATERING": "Food Processing & Catering",
+  "BEEKEEPING": "Beekeeping",
+  "MUSHROOM_CULTIVATION": "Mushroom Cultivation",
+  "SERICULTURE": "Sericulture (Silk Farming)",
+  "BEAUTY_PARLOR": "Beauty Parlor",
+  "RETAIL_SHOP": "Retail Shop",
+  "TEACHING_TUTORING": "Teaching & Tutoring",
+  "ANGANWADI_ASHA_WORKER": "Anganwadi/ASHA Worker"
+}

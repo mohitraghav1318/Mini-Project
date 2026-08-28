@@ -1,30 +1,41 @@
-import { Mukta, Rozha_One } from "next/font/google";
-import "./globals.scss";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+import { Mukta } from 'next/font/google';
+import '../globals.scss';
 
+import Navbar from '@/components/Navbar/Navbar';
+
+// Mukta-only per the font decision — Rozha One dropped since its
+// Devanagari support was unconfirmed and it fought the simple-theme goal.
+// Devanagari subset added so Hindi text renders correctly.
+// Both --font-body and --font-display point at Mukta, in case existing
+// SCSS still references --font-display anywhere — headings differentiate
+// via weight/size instead of a second typeface.
 const mukta = Mukta({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
+  subsets: ['latin', 'devanagari'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-body',
 });
 
-const rozhaOne = Rozha_One({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-display",
-});
+export default async function LocaleLayout({ children, params }) {
+  const { locale } = await params;
 
-export const metadata = {
-  title: "Rural Women Helper",
-  description:
-    "Learn skills, connect with your community, find help — all in one place.",
-};
+  if (!routing.locales.includes(locale)) {
+    notFound();
+  }
 
-export default function RootLayout({ children }) {
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
-      <body className={`${mukta.variable} ${rozhaOne.variable}`}>
+  <html lang={locale} className={mukta.variable}>
+    <body style={{ '--font-display': 'var(--font-body)' }}>
+      <NextIntlClientProvider messages={messages}>
+        <Navbar />
         {children}
-      </body>
-    </html>
-  );
+      </NextIntlClientProvider>
+    </body>
+  </html>
+);
 }
