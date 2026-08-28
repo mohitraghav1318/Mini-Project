@@ -49,19 +49,6 @@ export default function Home() {
 
   return (
     <main className={styles.home}>
-      <header className={styles.nav}>
-        <span className={styles.logo}>{nav.logo}</span>
-        <nav className={styles.navLinks}>
-          {nav.links.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-          <Link href={nav.cta.href} className={styles.navCta}>
-            {nav.cta.label}
-          </Link>
-        </nav>
-      </header>
 
       <BorderMotif />
 

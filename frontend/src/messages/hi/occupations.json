@@ -1,0 +1,20 @@
+{
+  "AGRICULTURE": "कृषि",
+  "DAIRY_FARMING": "डेयरी पालन",
+  "POULTRY_FARMING": "मुर्गी पालन",
+  "GOAT_SHEEP_REARING": "बकरी और भेड़ पालन",
+  "TAILORING_EMBROIDERY": "सिलाई और कढ़ाई",
+  "HANDICRAFTS": "हस्तशिल्प",
+  "WEAVING": "बुनाई",
+  "BASKET_MAKING": "टोकरी बनाना",
+  "POTTERY": "मिट्टी के बर्तनों का काम",
+  "PAPAD_PICKLE_MAKING": "पापड़ और अचार बनाना",
+  "FOOD_PROCESSING_CATERING": "खाद्य प्रसंस्करण और कैटरिंग",
+  "BEEKEEPING": "मधुमक्खी पालन",
+  "MUSHROOM_CULTIVATION": "मशरूम की खेती",
+  "SERICULTURE": "रेशम कीट पालन",
+  "BEAUTY_PARLOR": "ब्यूटी पार्लर",
+  "RETAIL_SHOP": "खुदरा दुकान",
+  "TEACHING_TUTORING": "शिक्षण और ट्यूशन",
+  "ANGANWADI_ASHA_WORKER": "आंगनवाड़ी/आशा कार्यकर्ता"
+}

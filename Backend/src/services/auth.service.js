@@ -12,7 +12,7 @@ export const findUserByEmail = async (email) => {
   return prisma.user.findUnique({ where: { email } });
 };
 
-export const createUser = async ({ name, email, password }) => {
+export const createUser = async ({ name, email, password, shgName, district, state, occupation }) => {
   const existingUser = await findUserByEmail(email);
   if (existingUser) {
     throw new ApiError(409, "An account with this email already exists.");
@@ -21,12 +21,26 @@ export const createUser = async ({ name, email, password }) => {
   const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
   const user = await prisma.user.create({
-    data: { name, email, password: hashedPassword },
+    data: {
+      name,
+      email,
+      password: hashedPassword,
+      shgName,
+      district,
+      state,
+      occupation,
+      role: "SHG_MEMBER",
+    },
     select: {
       id: true,
       name: true,
       email: true,
       role: true,
+      shgName: true,
+      district: true,
+      state: true,
+      occupation: true,
+      points: true,
       createdAt: true,
     },
   });
@@ -47,19 +61,18 @@ export const validateUserCredentials = async (email, password) => {
   }
 
   const safeUser = {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    role: user.role,
-    bio: user.bio,
-    district: user.district,
-    onboarded: user.onboarded,
-    points: user.points,
-    state: user.state,
-    workPreference: user.workPreference,
-    createdAt: user.createdAt,
-    updatedAt: user.updatedAt,
-  };
+  id: user.id,
+  name: user.name,
+  email: user.email,
+  role: user.role,
+  shgName: user.shgName,
+  district: user.district,
+  state: user.state,
+  occupation: user.occupation,
+  points: user.points,
+  createdAt: user.createdAt,
+  updatedAt: user.updatedAt,
+};
 
   // Return tokenVersion separately — the controller needs it for the JWT,
   // but it should NOT go in the response sent to the frontend.

@@ -1,0 +1,29 @@
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'SHG_MEMBER');
+
+-- CreateEnum
+CREATE TYPE "Occupation" AS ENUM ('AGRICULTURE', 'DAIRY_FARMING', 'POULTRY_FARMING', 'GOAT_SHEEP_REARING', 'TAILORING_EMBROIDERY', 'HANDICRAFTS', 'WEAVING', 'BASKET_MAKING', 'POTTERY', 'PAPAD_PICKLE_MAKING', 'FOOD_PROCESSING_CATERING', 'BEEKEEPING', 'MUSHROOM_CULTIVATION', 'SERICULTURE', 'BEAUTY_PARLOR', 'RETAIL_SHOP', 'TEACHING_TUTORING', 'ANGANWADI_ASHA_WORKER');
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "role" "Role" NOT NULL DEFAULT 'SHG_MEMBER',
+    "shgName" TEXT NOT NULL,
+    "district" TEXT NOT NULL,
+    "state" TEXT NOT NULL,
+    "occupation" "Occupation" NOT NULL,
+    "points" INTEGER NOT NULL DEFAULT 0,
+    "resetTokenHash" TEXT,
+    "resetTokenExpiry" TIMESTAMP(3),
+    "tokenVersion" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
