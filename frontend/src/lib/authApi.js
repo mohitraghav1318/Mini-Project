@@ -1,10 +1,10 @@
 import { apiFetch } from "./api";
 
 // NOTE: adjust these paths if your Express routes differ
-export function registerUser({ name, email, password }) {
+export function registerUser({ name, email, password, shgName, district, state, occupation }) {
   return apiFetch("/api/auth/register", {
     method: "POST",
-    body: JSON.stringify({ name, email, password }),
+    body: JSON.stringify({ name, email, password, shgName, district, state, occupation }),
   });
 }
 
