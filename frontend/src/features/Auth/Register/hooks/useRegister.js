@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { registerUser } from "@/lib/authApi";
+import { useAuth } from "@/context/AuthContext";
 
 const initialForm = {
   name: "",
@@ -17,6 +18,7 @@ const initialForm = {
 
 export function useRegister() {
   const router = useRouter();
+  const { refreshUser } = useAuth();
   const tErrors = useTranslations("register.errors");
   const [form, setForm] = useState(initialForm);
   const [fieldErrors, setFieldErrors] = useState({});
@@ -89,6 +91,7 @@ export function useRegister() {
     setIsSubmitting(true);
     try {
       await registerUser(form);
+      await refreshUser();
       router.push("/dashboard");
     } catch (err) {
       setFormError(err.message || "Registration failed");

@@ -6,6 +6,7 @@ import { Mukta } from 'next/font/google';
 import '../globals.scss';
 
 import Navbar from '@/components/Navbar/Navbar';
+import { AuthProvider } from '@/context/AuthContext';
 
 // Mukta-only per the font decision — Rozha One dropped since its
 // Devanagari support was unconfirmed and it fought the simple-theme goal.
@@ -32,8 +33,10 @@ export default async function LocaleLayout({ children, params }) {
   <html lang={locale} className={mukta.variable}>
     <body style={{ '--font-display': 'var(--font-body)' }}>
       <NextIntlClientProvider messages={messages}>
-        <Navbar />
-        {children}
+        <AuthProvider>
+          <Navbar />
+          {children}
+        </AuthProvider>
       </NextIntlClientProvider>
     </body>
   </html>

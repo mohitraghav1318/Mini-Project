@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import DashboardHeader from "./components/DashboardHeader";
 import ProfileCard from "./components/ProfileCard";
 import EditProfileForm from "./components/EditProfileForm/EditProfileForm";
 import styles from "./Dashboard.module.scss";
 import { useDashboard } from "./hooks/useDashboard";
 
 export default function Dashboard() {
-  const { user, isLoading, isLoggingOut, handleLogout, setUser } = useDashboard();
+  const { user, isLoading, setUser } = useDashboard();
   const [isEditing, setIsEditing] = useState(false);
 
   function handleProfileUpdated(updatedUser) {
@@ -18,7 +17,6 @@ export default function Dashboard() {
 
   return (
     <div className={styles.page}>
-      <DashboardHeader onLogout={handleLogout} isLoggingOut={isLoggingOut} />
       <main className={styles.content}>
         {isLoading ? (
           <p className={styles.loadingText}>Loading your dashboard...</p>
