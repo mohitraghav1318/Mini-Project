@@ -8,6 +8,7 @@ import { useRouter } from "@/i18n/navigation";
 const AuthContext = createContext({
   user: null,
   isLoading: true,
+  error: null,
   refreshUser: async () => null,
   logout: async () => {},
   setUser: () => {},
@@ -16,9 +17,12 @@ const AuthContext = createContext({
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const refreshUser = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
     try {
       const data = await getCurrentUser();
       const userData = data?.data || null;
@@ -26,6 +30,7 @@ export function AuthProvider({ children }) {
       return userData;
     } catch (err) {
       setUser(null);
+      setError(err);
       return null;
     } finally {
       setIsLoading(false);
@@ -48,7 +53,7 @@ export function AuthProvider({ children }) {
   }, [router]);
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, refreshUser, logout, setUser }}>
+    <AuthContext.Provider value={{ user, isLoading, error, refreshUser, logout, setUser }}>
       {children}
     </AuthContext.Provider>
   );

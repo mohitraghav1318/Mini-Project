@@ -6,13 +6,13 @@ import { useAuth } from "@/context/AuthContext";
 
 export function useDashboard() {
   const router = useRouter();
-  const { user, isLoading, logout, setUser } = useAuth();
+  const { user, isLoading, error, refreshUser, logout, setUser } = useAuth();
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (!isLoading && !user && !error) {
       router.push("/login");
     }
-  }, [isLoading, user, router]);
+  }, [isLoading, user, error, router]);
 
-  return { user, isLoading, handleLogout: logout, setUser };
+  return { user, isLoading, error, refreshUser, handleLogout: logout, setUser };
 }

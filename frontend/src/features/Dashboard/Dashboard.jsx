@@ -10,7 +10,7 @@ import styles from "./Dashboard.module.scss";
 import { useDashboard } from "./hooks/useDashboard";
 
 export default function Dashboard() {
-  const { user, isLoading, setUser } = useDashboard();
+  const { user, isLoading, error, refreshUser, setUser } = useDashboard();
   const [isEditing, setIsEditing] = useState(false);
   const t = useTranslations("dashboard");
   const tStates = useTranslations("states");
@@ -26,7 +26,33 @@ export default function Dashboard() {
     <div className={styles.page}>
       <main className={styles.content}>
         {isLoading ? (
-          <p className={styles.loadingText}>Loading your dashboard...</p>
+          <div className={styles.skeletonGrid} aria-label="Loading dashboard" role="status">
+            <div className={`${styles.skeletonCard} ${styles.skeletonProfile}`}>
+              <div className={styles.skeletonHeader}>
+                <span className={styles.skeletonAvatar} />
+                <div className={styles.skeletonIntro}>
+                  <span className={styles.skeletonLineSmall} />
+                  <span className={styles.skeletonLineTitle} />
+                  <span className={styles.skeletonLineText} />
+                </div>
+                <span className={styles.skeletonButton} />
+              </div>
+              <div className={styles.skeletonDetails}>
+                <span /><span /><span /><span />
+              </div>
+            </div>
+            <div className={`${styles.skeletonCard} ${styles.skeletonCourse}`}>
+              <span className={styles.skeletonCourseTitle} />
+              <span className={styles.skeletonCourseText} />
+              <span className={styles.skeletonButton} />
+            </div>
+          </div>
+        ) : error ? (
+          <section className={styles.errorState} role="alert">
+            <h2>We couldn&apos;t load your dashboard</h2>
+            <p>Please check your connection and try again.</p>
+            <Button onClick={refreshUser}>Try Again</Button>
+          </section>
         ) : (
           user && (
             <>

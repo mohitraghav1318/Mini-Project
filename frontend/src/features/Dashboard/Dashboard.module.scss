@@ -16,9 +16,111 @@
   margin: 0 auto;
 }
 
-.loadingText {
-  opacity: 0.7;
-  font-size: 0.95rem;
+.skeletonGrid {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.skeletonCard,
+.errorState {
+  width: 100%;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.skeletonCard {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeletonCard::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  animation: skeletonShimmer 1.4s ease-in-out infinite;
+}
+
+.skeletonProfile {
+  padding: 3rem 2.5rem 2.25rem;
+  border-top: 4px solid #e2a33d;
+}
+
+.skeletonHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-bottom: 2.1rem;
+  border-bottom: 1px solid #eeeeec;
+}
+
+.skeletonAvatar,
+.skeletonLineSmall,
+.skeletonLineTitle,
+.skeletonLineText,
+.skeletonButton,
+.skeletonDetails span,
+.skeletonCourseTitle,
+.skeletonCourseText {
+  display: block;
+  border-radius: 999px;
+  background: #eee9df;
+}
+
+.skeletonAvatar {
+  width: 3.6rem;
+  height: 3.6rem;
+  flex: 0 0 auto;
+  border-radius: 0.8rem;
+}
+
+.skeletonIntro {
+  display: grid;
+  flex: 1;
+  gap: 0.45rem;
+}
+
+.skeletonLineSmall { width: 5rem; height: 0.7rem; }
+.skeletonLineTitle { width: min(18rem, 70%); height: 1.35rem; }
+.skeletonLineText { width: min(25rem, 90%); height: 0.8rem; }
+.skeletonButton { width: 7rem; height: 2.5rem; }
+
+.skeletonDetails {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding-top: 1.9rem;
+}
+
+.skeletonDetails span { height: 4.2rem; border-radius: 0.75rem; }
+
+.skeletonCourse {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 11rem;
+  padding: 2.5rem;
+}
+
+.skeletonCourseTitle { width: 6rem; height: 1.2rem; }
+.skeletonCourseText { width: min(18rem, 35%); height: 0.85rem; }
+
+.errorState {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.errorState h2 { font-size: 1.35rem; }
+.errorState p { color: #76716b; font-size: 0.9rem; }
+
+@keyframes skeletonShimmer {
+  100% { transform: translateX(100%); }
 }
 
 .profileCard {
@@ -193,6 +295,10 @@
     padding: 1.35rem;
   }
 
+  .skeletonProfile {
+    padding: 1.35rem;
+  }
+
   .profileHeader {
     align-items: flex-start;
     flex-direction: column;
@@ -206,11 +312,30 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .skeletonDetails {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .courseCard {
     align-items: flex-start;
     flex-direction: column;
     gap: 1rem;
     padding: 1.35rem;
+  }
+
+  .skeletonHeader,
+  .skeletonCourse {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .skeletonCourse {
+    gap: 1rem;
+    padding: 1.35rem;
+  }
+
+  .skeletonButton {
+    width: 100%;
   }
 
   .buttonLink {
@@ -225,6 +350,10 @@
   }
 
   .profileDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .skeletonDetails {
     grid-template-columns: 1fr;
   }
 
