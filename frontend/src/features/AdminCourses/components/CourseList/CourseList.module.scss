@@ -1,0 +1,57 @@
+.list {
+  display: grid;
+  gap: 1rem;
+  max-width: 42rem;
+  margin-top: 2.5rem;
+}
+
+.card {
+  padding: 1.25rem;
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: 6px;
+  background: var(--color-cotton, #fff);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cardHeader h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1.15rem;
+}
+
+.category {
+  color: var(--color-indigo);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.description {
+  margin: 0.75rem 0;
+  color: var(--color-text);
+}
+
+.lessonCount,
+.status,
+.error {
+  font-size: 0.9rem;
+}
+
+.lessonCount,
+.status {
+  color: var(--color-muted, #76716b);
+}
+
+.status {
+  margin-top: 2.5rem;
+}
+
+.error {
+  margin-top: 2.5rem;
+  color: var(--color-alta, #c0392b);
+}

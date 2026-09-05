@@ -10,5 +10,25 @@
     "submitLabel": "Create course",
     "success": "Course created successfully.",
     "error": "Could not create the course. Please try again."
+  },
+  "list": {
+    "heading": "Courses",
+    "loading": "Loading courses...",
+    "empty": "No courses yet.",
+    "lesson": "lesson",
+    "lessons": "lessons",
+    "addLesson": "Add lesson",
+    "hideLessonForm": "Hide lesson form"
+  },
+  "lessonForm": {
+    "titleLabel": "Lesson title",
+    "titlePlaceholder": "Enter the lesson title",
+    "orderLabel": "Order",
+    "orderPlaceholder": "Enter the lesson order",
+    "youtubeUrlLabel": "YouTube URL",
+    "youtubeUrlPlaceholder": "Paste the YouTube URL",
+    "submitLabel": "Create lesson",
+    "success": "Lesson created successfully.",
+    "error": "Could not create the lesson. Please try again."
   }
 }

@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { createCourse } from "@/lib/courseApi";
+import { createLesson } from "@/lib/courseApi";
 
 const initialForm = {
   title: "",
-  description: "",
-  category: "",
+  order: "",
+  youtubeUrl: "",
 };
 
-export function useCourseForm(onSuccess) {
+export function useLessonForm(courseId, onLessonAdded) {
   const t = useTranslations("adminCourses");
   const [form, setForm] = useState(initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,11 +23,6 @@ export function useCourseForm(onSuccess) {
     setSuccess(false);
   }
 
-  function handleCategoryChange(value) {
-    setForm((current) => ({ ...current, category: value }));
-    setSuccess(false);
-  }
-
   async function handleSubmit(event) {
     event.preventDefault();
     setIsSubmitting(true);
@@ -35,12 +30,12 @@ export function useCourseForm(onSuccess) {
     setSuccess(false);
 
     try {
-      await createCourse(form);
+      await createLesson(courseId, { ...form, order: Number(form.order) });
       setForm(initialForm);
       setSuccess(true);
-      onSuccess?.();
+      onLessonAdded?.();
     } catch (err) {
-      setError(err.message || t("form.error"));
+      setError(err.message || t("lessonForm.error"));
     } finally {
       setIsSubmitting(false);
     }
@@ -52,7 +47,6 @@ export function useCourseForm(onSuccess) {
     success,
     isSubmitting,
     handleChange,
-    handleCategoryChange,
     handleSubmit,
   };
 }

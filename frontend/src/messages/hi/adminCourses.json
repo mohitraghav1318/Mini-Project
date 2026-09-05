@@ -10,5 +10,25 @@
     "submitLabel": "पाठ्यक्रम बनाएँ",
     "success": "पाठ्यक्रम सफलतापूर्वक बनाया गया।",
     "error": "पाठ्यक्रम नहीं बनाया जा सका। कृपया पुनः प्रयास करें।"
+  },
+  "list": {
+    "heading": "पाठ्यक्रम",
+    "loading": "पाठ्यक्रम लोड हो रहे हैं...",
+    "empty": "अभी कोई पाठ्यक्रम नहीं है।",
+    "lesson": "पाठ",
+    "lessons": "पाठ",
+    "addLesson": "पाठ जोड़ें",
+    "hideLessonForm": "पाठ फ़ॉर्म छिपाएँ"
+  },
+  "lessonForm": {
+    "titleLabel": "पाठ का नाम",
+    "titlePlaceholder": "पाठ का नाम दर्ज करें",
+    "orderLabel": "क्रम",
+    "orderPlaceholder": "पाठ का क्रम दर्ज करें",
+    "youtubeUrlLabel": "YouTube URL",
+    "youtubeUrlPlaceholder": "YouTube URL पेस्ट करें",
+    "submitLabel": "पाठ बनाएँ",
+    "success": "पाठ सफलतापूर्वक बनाया गया।",
+    "error": "पाठ नहीं बनाया जा सका। कृपया पुनः प्रयास करें।"
   }
 }

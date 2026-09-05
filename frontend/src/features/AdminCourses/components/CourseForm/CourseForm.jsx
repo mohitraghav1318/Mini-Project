@@ -9,7 +9,7 @@ import { OCCUPATION_KEYS } from "@/features/Auth/Register/data/register.data";
 import styles from "./CourseForm.module.scss";
 import { useCourseForm } from "./hooks/useCourseForm";
 
-export default function CourseForm() {
+export default function CourseForm({ onSuccess }) {
   const t = useTranslations("adminCourses");
   const tOccupations = useTranslations("occupations");
   const {
@@ -20,7 +20,7 @@ export default function CourseForm() {
     handleChange,
     handleCategoryChange,
     handleSubmit,
-  } = useCourseForm();
+  } = useCourseForm(onSuccess);
 
   const occupationOptions = OCCUPATION_KEYS.map((key) => ({
     value: key,
