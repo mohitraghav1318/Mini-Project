@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 import { listCourses } from "@/lib/courseApi";
 
 export function useCourses() {
-  const [courses, setCourses] = useState([]);
+  const { user } = useAuth();
+  const [fetchedCourses, setFetchedCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,7 +17,7 @@ export function useCourses() {
       try {
         const response = await listCourses();
         if (isCurrent) {
-          setCourses(response?.data || []);
+          setFetchedCourses(response?.data || []);
         }
       } catch (err) {
         if (isCurrent) {
@@ -34,6 +36,23 @@ export function useCourses() {
       isCurrent = false;
     };
   }, []);
+
+  let courses = fetchedCourses;
+
+  if (user?.occupation) {
+    const matchingCourses = [];
+    const remainingCourses = [];
+
+    fetchedCourses.forEach((course) => {
+      if (course.category === user.occupation) {
+        matchingCourses.push(course);
+      } else {
+        remainingCourses.push(course);
+      }
+    });
+
+    courses = [...matchingCourses, ...remainingCourses];
+  }
 
   return { courses, isLoading, error };
 }

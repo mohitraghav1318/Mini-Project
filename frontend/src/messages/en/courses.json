@@ -1,5 +1,8 @@
 {
   "title": "Courses",
+  "searchLabel": "Search courses",
+  "searchPlaceholder": "Search by course title or description",
+  "noResults": "No courses match your search.",
   "loading": "Loading courses...",
   "empty": "No courses available yet.",
   "lesson": "lesson",
