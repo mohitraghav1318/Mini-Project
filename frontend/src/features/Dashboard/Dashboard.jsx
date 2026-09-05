@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import Card from "@/components/Card/Card";
 import Button from "@/components/Button/Button";
-import DetailRow from "@/components/DetailRow/DetailRow";
 import EditProfileForm from "./components/EditProfileForm/EditProfileForm";
 import styles from "./Dashboard.module.scss";
 import { useDashboard } from "./hooks/useDashboard";
@@ -33,28 +32,41 @@ export default function Dashboard() {
             <>
               <div className={styles.cardsGrid}>
                 <Card className={styles.profileCard}>
-                  <h2 className={styles.profileTitle}>{t("welcome", { name: user.name })}</h2>
-                  <div className={styles.profileDetails}>
-                    <DetailRow label={t("profile.shgName")} value={user.shgName} />
-                    <DetailRow label={t("profile.district")} value={user.district} />
-                    <DetailRow 
-                      label={t("profile.state")} 
-                      value={user.state ? tStates(user.state) : ""} 
-                    />
-                    <DetailRow 
-                      label={t("profile.occupation")} 
-                      value={user.occupation ? tOccupations(user.occupation) : ""} 
-                    />
+                  <div className={styles.profileHeader}>
+                    <div className={styles.avatar}>{user.name?.slice(0, 2).toUpperCase()}</div>
+                    <div className={styles.profileIntro}>
+                      <span className={styles.memberStatus}>Active Member</span>
+                      <h2 className={styles.profileTitle}>{t("welcome", { name: user.name })}</h2>
+                      <p className={styles.profileSubtitle}>Access your SHG information and learning resources</p>
+                    </div>
+                    <Button onClick={() => setIsEditing(true)} className={styles.editButton}>
+                      <span aria-hidden="true">&#9998;</span> {t("profile.editButton")}
+                    </Button>
                   </div>
-                  <Button 
-                    onClick={() => setIsEditing(true)}
-                    className={styles.editButton}
-                  >
-                    {t("profile.editButton")}
-                  </Button>
+                  <div className={styles.profileDetails}>
+                    <div className={styles.detailTile}>
+                      <span>{t("profile.shgName")}</span>
+                      <strong>{user.shgName || "—"}</strong>
+                    </div>
+                    <div className={styles.detailTile}>
+                      <span>{t("profile.district")}</span>
+                      <strong>{user.district || "—"}</strong>
+                    </div>
+                    <div className={styles.detailTile}>
+                      <span>{t("profile.state")}</span>
+                      <strong>{user.state ? tStates(user.state) : "—"}</strong>
+                    </div>
+                    <div className={styles.detailTile}>
+                      <span>{t("profile.occupation")}</span>
+                      <strong>{user.occupation ? tOccupations(user.occupation) : "—"}</strong>
+                    </div>
+                  </div>
                 </Card>
-                <Card className={styles.card}>
-                  <h3 className={styles.cardTitle}>{t("courses.title")}</h3>
+                <Card className={styles.courseCard}>
+                  <div>
+                    <span className={styles.courseEyebrow}>Empowerment &amp; Skills</span>
+                    <h3 className={styles.cardTitle}>{t("courses.title")}</h3>
+                  </div>
                   {/* Stub for enrollment status */}
                   {false ? (
                     <>
@@ -83,11 +95,9 @@ export default function Dashboard() {
                   ) : (
                     <>
                       <p className={styles.cardText}>{t("courses.comingSoon")}</p>
-                      <Button 
-                        onClick={() => router.push(`/courses`)}
-                        className={styles.buttonLink}
-                      >
+                      <Button onClick={() => router.push(`/courses`)} className={styles.buttonLink}>
                         {t("courses.explore")}
+                        <span aria-hidden="true">&#8250;</span>
                       </Button>
                     </>
                   )}
