@@ -1,3 +1,14 @@
 {
-  "title": "एडमिन - पाठ्यक्रम"
+  "title": "एडमिन - पाठ्यक्रम",
+  "form": {
+    "titleLabel": "पाठ्यक्रम का नाम",
+    "titlePlaceholder": "पाठ्यक्रम का नाम दर्ज करें",
+    "descriptionLabel": "विवरण",
+    "descriptionPlaceholder": "पाठ्यक्रम का विवरण दर्ज करें",
+    "categoryLabel": "श्रेणी",
+    "categoryPlaceholder": "श्रेणी चुनें",
+    "submitLabel": "पाठ्यक्रम बनाएँ",
+    "success": "पाठ्यक्रम सफलतापूर्वक बनाया गया।",
+    "error": "पाठ्यक्रम नहीं बनाया जा सका। कृपया पुनः प्रयास करें।"
+  }
 }

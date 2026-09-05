@@ -1,3 +1,14 @@
 {
-  "title": "Admin - Courses"
+  "title": "Admin - Courses",
+  "form": {
+    "titleLabel": "Course title",
+    "titlePlaceholder": "Enter the course title",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Enter a course description",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "Select a category",
+    "submitLabel": "Create course",
+    "success": "Course created successfully.",
+    "error": "Could not create the course. Please try again."
+  }
 }
