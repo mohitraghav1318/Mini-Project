@@ -1,0 +1,102 @@
+.page {
+  min-height: 100vh;
+  padding: 2.5rem 2rem 4rem;
+  background: var(--color-bg);
+}
+
+.header,
+.learningArea {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.header p {
+  max-width: 48rem;
+  margin: 0.75rem 0 0;
+  color: var(--color-muted, #76716b);
+  line-height: 1.6;
+}
+
+.learningArea {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.playerSection,
+.lessonPanel {
+  min-width: 0;
+}
+
+.playerSection h2,
+.lessonPanel h2 {
+  margin: 0 0 0.75rem;
+  color: var(--color-text);
+  font-size: 1.1rem;
+}
+
+.playerFrame {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  background: #111;
+}
+
+.playerFrame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.lessonList {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.lesson {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: 6px;
+  background: var(--color-cotton, #fff);
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lesson:hover,
+.lesson:focus-visible,
+.selectedLesson {
+  border-color: var(--color-indigo);
+  outline: none;
+}
+
+.selectedLesson {
+  background: var(--color-indigo);
+  color: #fff;
+}
+
+.status,
+.error {
+  margin: 2.5rem 2rem;
+}
+
+.status {
+  color: var(--color-muted, #76716b);
+}
+
+.error {
+  color: var(--color-alta, #c0392b);
+}
+
+@media (max-width: 720px) {
+  .learningArea {
+    grid-template-columns: 1fr;
+  }
+}

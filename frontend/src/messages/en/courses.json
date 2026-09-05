@@ -4,5 +4,12 @@
   "empty": "No courses available yet.",
   "lesson": "lesson",
   "lessons": "lessons",
-  "error": "Could not load courses. Please try again."
+  "error": "Could not load courses. Please try again.",
+  "detail": {
+    "loading": "Loading course...",
+    "notFound": "Course not found.",
+    "playerTitle": "Now playing",
+    "lessonsTitle": "Lessons",
+    "noLessons": "No lessons are available for this course yet."
+  }
 }
