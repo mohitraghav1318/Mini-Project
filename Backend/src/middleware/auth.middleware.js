@@ -13,6 +13,8 @@ export const protect = asyncHandler(async (req, res, next) => {
     throw new ApiError(401, "Not authenticated. Please log in.");
   }
 
+  console.log("Request entered at:", Date.now());
+
   let decoded;
   try {
     decoded = verifyToken(token);
@@ -20,16 +22,19 @@ export const protect = asyncHandler(async (req, res, next) => {
     throw new ApiError(401, "Session expired or invalid. Please log in again.");
   }
 
+  console.time("db-user-lookup");
   const user = await prisma.user.findUnique({
     where: { id: decoded.userId },
     select: SAFE_USER_SELECT,
   });
+  console.timeEnd("db-user-lookup");
 
   if (!user) {
     throw new ApiError(401, "User no longer exists.");
   }
 
   req.user = user;
+  console.log("Request responding at:", Date.now());
   next();
 });
 

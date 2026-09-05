@@ -4,7 +4,7 @@ import { routing } from './routing';
 // list every message file here as we add new ones —
 // each filename becomes the namespace key components use,
 // e.g. useTranslations('register') reads from register.json
-const namespaces = ['common', 'occupations', 'states', 'register'];
+const namespaces = ['common', 'occupations', 'states', 'register', 'dashboard'];
 
 export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale;

@@ -1,0 +1,22 @@
+{
+  "welcome": "Welcome, {name}",
+  "profile": {
+    "title": "Your Profile",
+    "shgName": "SHG Name",
+    "district": "District",
+    "state": "State",
+    "occupation": "Occupation",
+    "editButton": "Edit Profile"
+  },
+  "courses": {
+    "title": "Courses",
+    "comingSoon": "Courses are coming soon!",
+    "explore": "Explore Courses"
+  },
+  "community": {
+    "title": "Community",
+    "comingSoon": "Community features are coming soon!",
+    "explore": "Explore Community"
+  },
+  "backToDashboard": "Back to Dashboard"
+}

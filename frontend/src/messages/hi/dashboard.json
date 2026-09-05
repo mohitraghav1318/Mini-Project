@@ -1,0 +1,22 @@
+{
+  "welcome": "{name}, आपका स्वागत है",
+  "profile": {
+    "title": "आपकी प्रोफ़ाइल",
+    "shgName": "एसएचजी नाम",
+    "district": "जिला",
+    "state": "राज्य",
+    "occupation": "व्यवसाय",
+    "editButton": "प्रोफ़ाइल संपादित करें"
+  },
+  "courses": {
+    "title": "कोर्सेस",
+    "comingSoon": "कोर्सेस जल्द ही आ रहे हैं!",
+    "explore": "कोर्सेस खोजें"
+  },
+  "community": {
+    "title": "समुदाय",
+    "comingSoon": "समुदाय सुविधाएँ जल्द ही आएंगी!",
+    "explore": "समुदाय खोजें"
+  },
+  "backToDashboard": "डैशबोर्ड पर वापस जाएँ"
+}
