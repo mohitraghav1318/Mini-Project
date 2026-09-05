@@ -1,0 +1,8 @@
+{
+  "title": "Courses",
+  "loading": "Loading courses...",
+  "empty": "No courses available yet.",
+  "lesson": "lesson",
+  "lessons": "lessons",
+  "error": "Could not load courses. Please try again."
+}
