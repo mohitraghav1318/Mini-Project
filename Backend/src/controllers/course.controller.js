@@ -3,6 +3,18 @@ import ApiError from "../utils/ApiError.js";
 import prisma from "../config/db.js";
 import { VALID_OCCUPATIONS } from "../constants/occupations.js";
 
+export const listCourses = asyncHandler(async (req, res) => {
+  const courses = await prisma.course.findMany({
+    orderBy: { createdAt: "desc" },
+    include: { lessons: true },
+  });
+
+  return res.status(200).json({
+    success: true,
+    data: courses,
+  });
+});
+
 export const createCourse = asyncHandler(async (req, res) => {
   const { title, description, category } = req.body;
 
