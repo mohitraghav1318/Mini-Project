@@ -1,0 +1,41 @@
+{
+  "heading": "अपनी यात्रा शुरू करें",
+  "subheading": "हज़ारों महिलाओं से जुड़ें, सीखें और एक-दूसरे की मदद करें — बिल्कुल मुफ़्त।",
+  "title": "अपना खाता बनाएं",
+  "labels": {
+    "name": "पूरा नाम",
+    "email": "ईमेल पता",
+    "password": "पासवर्ड",
+    "shgName": "स्वयं सहायता समूह (SHG) का नाम",
+    "district": "ज़िला",
+    "state": "राज्य",
+    "occupation": "व्यवसाय"
+  },
+  "placeholders": {
+    "name": "अपना पूरा नाम दर्ज करें",
+    "email": "you@example.com",
+    "password": "कम से कम 8 अक्षर",
+    "shgName": "अपने SHG का नाम दर्ज करें",
+    "district": "अपना ज़िला दर्ज करें",
+    "state": "अपना राज्य चुनें",
+    "occupation": "अपना व्यवसाय चुनें"
+  },
+  "errors": {
+    "nameRequired": "नाम आवश्यक है",
+    "nameMinLength": "नाम कम से कम 2 अक्षरों का होना चाहिए",
+    "emailRequired": "ईमेल आवश्यक है",
+    "emailInvalid": "एक वैध ईमेल पता दर्ज करें",
+    "passwordRequired": "पासवर्ड आवश्यक है",
+    "passwordMinLength": "पासवर्ड कम से कम 8 अक्षरों का होना चाहिए",
+    "shgNameRequired": "SHG का नाम आवश्यक है",
+    "shgNameMinLength": "SHG का नाम कम से कम 2 अक्षरों का होना चाहिए",
+    "districtRequired": "ज़िला आवश्यक है",
+    "stateRequired": "राज्य चुनना आवश्यक है",
+    "occupationRequired": "व्यवसाय चुनना आवश्यक है"
+  },
+  "submitLabel": "खाता बनाएं",
+  "footer": {
+    "text": "क्या आपके पास पहले से खाता है?",
+    "linkLabel": "लॉग इन करें"
+  }
+}

@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { loginUser } from "@/lib/authApi";
+import { useAuth } from "@/context/AuthContext";
 
 const initialForm = { email: "", password: "" };
 
 export function useLogin() {
   const router = useRouter();
+  const { refreshUser } = useAuth();
   const [form, setForm] = useState(initialForm);
   const [fieldErrors, setFieldErrors] = useState({});
   const [formError, setFormError] = useState("");
@@ -39,6 +41,7 @@ export function useLogin() {
     setIsSubmitting(true);
     try {
       await loginUser(form);
+      await refreshUser();
       router.push("/dashboard");
     } catch (err) {
       setFormError(err.message);

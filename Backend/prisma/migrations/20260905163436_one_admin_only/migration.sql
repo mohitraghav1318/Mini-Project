@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX one_admin_only ON "User" (role) WHERE role = 'ADMIN';

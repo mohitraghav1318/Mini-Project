@@ -1,0 +1,18 @@
+{
+  "title": "Courses",
+  "searchLabel": "Search courses",
+  "searchPlaceholder": "Search by course title or description",
+  "noResults": "No courses match your search.",
+  "loading": "Loading courses...",
+  "empty": "No courses available yet.",
+  "lesson": "lesson",
+  "lessons": "lessons",
+  "error": "Could not load courses. Please try again.",
+  "detail": {
+    "loading": "Loading course...",
+    "notFound": "Course not found.",
+    "playerTitle": "Now playing",
+    "lessonsTitle": "Lessons",
+    "noLessons": "No lessons are available for this course yet."
+  }
+}

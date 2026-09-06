@@ -1,0 +1,41 @@
+{
+  "heading": "Start your journey",
+  "subheading": "Join thousands of women learning, connecting, and helping each other — completely free.",
+  "title": "Create your account",
+  "labels": {
+    "name": "Full name",
+    "email": "Email address",
+    "password": "Password",
+    "shgName": "SHG (Self-Help Group) Name",
+    "district": "District",
+    "state": "State",
+    "occupation": "Occupation"
+  },
+  "placeholders": {
+    "name": "Enter your full name",
+    "email": "you@example.com",
+    "password": "At least 8 characters",
+    "shgName": "Enter your SHG name",
+    "district": "Enter your district",
+    "state": "Select your state",
+    "occupation": "Select your occupation"
+  },
+  "errors": {
+    "nameRequired": "Name is required",
+    "nameMinLength": "Name must be at least 2 characters",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Enter a valid email address",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "shgNameRequired": "SHG name is required",
+    "shgNameMinLength": "SHG name must be at least 2 characters",
+    "districtRequired": "District is required",
+    "stateRequired": "State is required",
+    "occupationRequired": "Occupation is required"
+  },
+  "submitLabel": "Create account",
+  "footer": {
+    "text": "Already have an account?",
+    "linkLabel": "Log in"
+  }
+}

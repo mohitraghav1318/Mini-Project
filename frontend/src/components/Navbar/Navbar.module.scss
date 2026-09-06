@@ -63,6 +63,50 @@
   }
 }
 
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.userName {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-indigo);
+}
+
+.logoutBtn {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  color: var(--color-indigo);
+  background: transparent;
+
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-indigo);
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background: var(--color-indigo);
+    color: var(--color-surface);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 640px) {
   .navbar {
     height: 58px;

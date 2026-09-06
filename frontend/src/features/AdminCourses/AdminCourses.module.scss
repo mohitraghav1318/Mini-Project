@@ -1,0 +1,15 @@
+.page {
+  min-height: 100vh;
+  padding: 2.5rem 2rem;
+  background: var(--color-bg);
+}
+
+.page h1 {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.loading {
+  margin: 2.5rem 2rem;
+  color: var(--color-text);
+}
