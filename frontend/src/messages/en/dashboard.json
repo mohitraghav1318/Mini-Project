@@ -18,5 +18,14 @@
     "comingSoon": "Community features are coming soon!",
     "explore": "Explore Community"
   },
-  "backToDashboard": "Back to Dashboard"
+  "backToDashboard": "Back to Dashboard",
+  "editProfile": {
+    "shgNamePlaceholder": "Enter your SHG name",
+    "districtPlaceholder": "Enter your district",
+    "statePlaceholder": "Enter your state",
+    "occupationPlaceholder": "Select your occupation",
+    "cancel": "Cancel",
+    "save": "Save changes",
+    "saving": "Saving..."
+  }
 }

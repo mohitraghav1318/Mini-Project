@@ -18,5 +18,14 @@
     "comingSoon": "समुदाय सुविधाएँ जल्द ही आएंगी!",
     "explore": "समुदाय खोजें"
   },
-  "backToDashboard": "डैशबोर्ड पर वापस जाएँ"
+  "backToDashboard": "डैशबोर्ड पर वापस जाएँ",
+  "editProfile": {
+    "shgNamePlaceholder": "अपने SHG का नाम दर्ज करें",
+    "districtPlaceholder": "अपना ज़िला दर्ज करें",
+    "statePlaceholder": "अपना राज्य दर्ज करें",
+    "occupationPlaceholder": "अपना व्यवसाय चुनें",
+    "cancel": "रद्द करें",
+    "save": "बदलाव सहेजें",
+    "saving": "सहेजा जा रहा है..."
+  }
 }
