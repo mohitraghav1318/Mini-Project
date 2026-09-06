@@ -8,7 +8,10 @@
     "categoryLabel": "Category",
     "categoryPlaceholder": "Select a category",
     "submitLabel": "Create course",
+    "updateSubmitLabel": "Save course",
+    "cancelLabel": "Cancel",
     "success": "Course created successfully.",
+    "updateSuccess": "Course updated successfully.",
     "error": "Could not create the course. Please try again."
   },
   "list": {
@@ -17,8 +20,18 @@
     "empty": "No courses yet.",
     "lesson": "lesson",
     "lessons": "lessons",
+    "lessonHeading": "Lessons",
     "addLesson": "Add lesson",
-    "hideLessonForm": "Hide lesson form"
+    "hideLessonForm": "Hide lesson form",
+    "edit": "Edit",
+    "delete": "Delete",
+    "courseDeleted": "Course deleted successfully.",
+    "lessonDeleted": "Lesson deleted successfully.",
+    "actionError": "Could not complete that action. Please try again."
+  },
+  "confirm": {
+    "deleteCourse": "Delete this course and all of its lessons?",
+    "deleteLesson": "Delete this lesson?"
   },
   "lessonForm": {
     "titleLabel": "Lesson title",
@@ -28,7 +41,10 @@
     "youtubeUrlLabel": "YouTube URL",
     "youtubeUrlPlaceholder": "Paste the YouTube URL",
     "submitLabel": "Create lesson",
+    "updateSubmitLabel": "Save lesson",
+    "cancelLabel": "Cancel",
     "success": "Lesson created successfully.",
+    "updateSuccess": "Lesson updated successfully.",
     "error": "Could not create the lesson. Please try again."
   }
 }

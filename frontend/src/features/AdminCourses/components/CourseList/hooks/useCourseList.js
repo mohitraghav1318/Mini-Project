@@ -38,5 +38,5 @@ export function useCourseList(refreshTrigger) {
     };
   }, [refreshTrigger]);
 
-  return { courses, isLoading, error };
+  return { courses, setCourses, isLoading, error };
 }

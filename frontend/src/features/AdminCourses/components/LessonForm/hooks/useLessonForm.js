@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { createLesson } from "@/lib/courseApi";
+import { createLesson, updateLesson } from "@/lib/courseApi";
 
 const initialForm = {
   title: "",
@@ -10,9 +10,9 @@ const initialForm = {
   youtubeUrl: "",
 };
 
-export function useLessonForm(courseId, onLessonAdded) {
+export function useLessonForm(courseId, initialLesson, onSuccess) {
   const t = useTranslations("adminCourses");
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState(initialLesson || initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -30,10 +30,13 @@ export function useLessonForm(courseId, onLessonAdded) {
     setSuccess(false);
 
     try {
-      await createLesson(courseId, { ...form, order: Number(form.order) });
-      setForm(initialForm);
+      const payload = { ...form, order: Number(form.order) };
+      const response = initialLesson
+        ? await updateLesson(courseId, initialLesson.id, payload)
+        : await createLesson(courseId, payload);
+      setForm(initialLesson || initialForm);
       setSuccess(true);
-      onLessonAdded?.();
+      onSuccess?.(response?.data);
     } catch (err) {
       setError(err.message || t("lessonForm.error"));
     } finally {

@@ -8,7 +8,10 @@
     "categoryLabel": "श्रेणी",
     "categoryPlaceholder": "श्रेणी चुनें",
     "submitLabel": "पाठ्यक्रम बनाएँ",
+    "updateSubmitLabel": "पाठ्यक्रम सहेजें",
+    "cancelLabel": "रद्द करें",
     "success": "पाठ्यक्रम सफलतापूर्वक बनाया गया।",
+    "updateSuccess": "पाठ्यक्रम सफलतापूर्वक अपडेट किया गया।",
     "error": "पाठ्यक्रम नहीं बनाया जा सका। कृपया पुनः प्रयास करें।"
   },
   "list": {
@@ -17,8 +20,18 @@
     "empty": "अभी कोई पाठ्यक्रम नहीं है।",
     "lesson": "पाठ",
     "lessons": "पाठ",
+    "lessonHeading": "पाठ",
     "addLesson": "पाठ जोड़ें",
-    "hideLessonForm": "पाठ फ़ॉर्म छिपाएँ"
+    "hideLessonForm": "पाठ फ़ॉर्म छिपाएँ",
+    "edit": "संपादित करें",
+    "delete": "हटाएँ",
+    "courseDeleted": "पाठ्यक्रम सफलतापूर्वक हटाया गया।",
+    "lessonDeleted": "पाठ सफलतापूर्वक हटाया गया।",
+    "actionError": "कार्रवाई पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।"
+  },
+  "confirm": {
+    "deleteCourse": "क्या यह पाठ्यक्रम और इसके सभी पाठ हटाने हैं?",
+    "deleteLesson": "क्या यह पाठ हटाना है?"
   },
   "lessonForm": {
     "titleLabel": "पाठ का नाम",
@@ -28,7 +41,10 @@
     "youtubeUrlLabel": "YouTube URL",
     "youtubeUrlPlaceholder": "YouTube URL पेस्ट करें",
     "submitLabel": "पाठ बनाएँ",
+    "updateSubmitLabel": "पाठ सहेजें",
+    "cancelLabel": "रद्द करें",
     "success": "पाठ सफलतापूर्वक बनाया गया।",
+    "updateSuccess": "पाठ सफलतापूर्वक अपडेट किया गया।",
     "error": "पाठ नहीं बनाया जा सका। कृपया पुनः प्रयास करें।"
   }
 }

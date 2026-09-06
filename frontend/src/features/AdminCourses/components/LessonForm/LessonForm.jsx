@@ -7,7 +7,7 @@ import Input from "@/components/Input/Input";
 import styles from "./LessonForm.module.scss";
 import { useLessonForm } from "./hooks/useLessonForm";
 
-export default function LessonForm({ courseId, onLessonAdded }) {
+export default function LessonForm({ courseId, initialLesson, onSuccess, onCancel }) {
   const t = useTranslations("adminCourses");
   const {
     form,
@@ -16,7 +16,7 @@ export default function LessonForm({ courseId, onLessonAdded }) {
     isSubmitting,
     handleChange,
     handleSubmit,
-  } = useLessonForm(courseId, onLessonAdded);
+  } = useLessonForm(courseId, initialLesson, onSuccess);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -54,12 +54,17 @@ export default function LessonForm({ courseId, onLessonAdded }) {
       <FormMessage type="error" message={error} />
       <FormMessage
         type="success"
-        message={success ? t("lessonForm.success") : null}
+        message={success ? t(initialLesson ? "lessonForm.updateSuccess" : "lessonForm.success") : null}
       />
 
       <Button type="submit" isLoading={isSubmitting} fullWidth>
-        {t("lessonForm.submitLabel")}
+        {t(initialLesson ? "lessonForm.updateSubmitLabel" : "lessonForm.submitLabel")}
       </Button>
+      {initialLesson && (
+        <Button type="button" variant="secondary" onClick={onCancel} fullWidth>
+          {t("lessonForm.cancelLabel")}
+        </Button>
+      )}
     </form>
   );
 }

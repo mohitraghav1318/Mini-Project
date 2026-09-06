@@ -9,7 +9,7 @@ import { OCCUPATION_KEYS } from "@/features/Auth/Register/data/register.data";
 import styles from "./CourseForm.module.scss";
 import { useCourseForm } from "./hooks/useCourseForm";
 
-export default function CourseForm({ onSuccess }) {
+export default function CourseForm({ initialCourse, onSuccess, onCancel }) {
   const t = useTranslations("adminCourses");
   const tOccupations = useTranslations("occupations");
   const {
@@ -20,7 +20,7 @@ export default function CourseForm({ onSuccess }) {
     handleChange,
     handleCategoryChange,
     handleSubmit,
-  } = useCourseForm(onSuccess);
+  } = useCourseForm(initialCourse, onSuccess);
 
   const occupationOptions = OCCUPATION_KEYS.map((key) => ({
     value: key,
@@ -65,11 +65,19 @@ export default function CourseForm({ onSuccess }) {
       />
 
       <FormMessage type="error" message={error} />
-      <FormMessage type="success" message={success ? t("form.success") : null} />
+      <FormMessage
+        type="success"
+        message={success ? t(initialCourse ? "form.updateSuccess" : "form.success") : null}
+      />
 
       <Button type="submit" isLoading={isSubmitting} fullWidth>
-        {t("form.submitLabel")}
+        {t(initialCourse ? "form.updateSubmitLabel" : "form.submitLabel")}
       </Button>
+      {initialCourse && (
+        <Button type="button" variant="secondary" onClick={onCancel} fullWidth>
+          {t("form.cancelLabel")}
+        </Button>
+      )}
     </form>
   );
 }
