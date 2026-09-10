@@ -3,6 +3,7 @@ import ApiError from "../utils/ApiError.js";
 import prisma from "../config/db.js";
 import { VALID_OCCUPATIONS } from "../constants/occupations.js";
 import { fetchYoutubeMetadata, parseYoutubeVideoId } from "../utils/youtube.js";
+import { isUserEnrolled } from "../services/enrollment.service.js";
 
 export const listCourses = asyncHandler(async (req, res) => {
   const courses = await prisma.course.findMany({
@@ -325,15 +326,7 @@ export const getEnrollmentStatus = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Course not found.");
   }
 
-  const enrollment = await prisma.enrollment.findUnique({
-    where: {
-      userId_courseId: {
-        userId: req.user.id,
-        courseId,
-      },
-    },
-    select: { id: true },
-  });
+  const enrollment = await isUserEnrolled(req.user.id, courseId);
 
   return res.status(200).json({
     success: true,
