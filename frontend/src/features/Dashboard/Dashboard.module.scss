@@ -254,6 +254,14 @@
   line-height: 1.5;
 }
 
+.cardError {
+  max-width: 29rem;
+  margin: 0.5rem 0 0;
+  color: var(--color-error);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .courseEyebrow {
   color: #d78b0d;
   background: #fff8e9;
@@ -273,6 +281,39 @@
 .buttonLink:hover {
   background-color: #c67e0c;
   text-decoration: none;
+}
+
+.courseList {
+  display: grid;
+  gap: 0.55rem;
+  min-width: min(100%, 22rem);
+}
+
+.courseItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-indigo);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+}
+
+.courseItem:hover,
+.courseItem:focus-visible {
+  border-color: var(--color-indigo);
+  outline: none;
+}
+
+.courseArrow {
+  flex: 0 0 auto;
+  font-size: 1.2rem;
 }
 
 /* Edit Button */

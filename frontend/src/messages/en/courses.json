@@ -13,6 +13,15 @@
     "notFound": "Course not found.",
     "playerTitle": "Now playing",
     "lessonsTitle": "Lessons",
-    "noLessons": "No lessons are available for this course yet."
+    "noLessons": "No lessons are available for this course yet.",
+    "enroll": "Enroll",
+    "unenroll": "Unenroll",
+    "adminCannotEnroll": "Enrollment unavailable",
+    "adminEnrollHint": "Admins cannot enroll in courses.",
+    "enrollmentErrors": {
+      "load": "We couldn't check your enrollment. Please try again.",
+      "enroll": "We couldn't enroll you in this course. Please try again.",
+      "unenroll": "We couldn't remove your enrollment. Please try again."
+    }
   }
 }

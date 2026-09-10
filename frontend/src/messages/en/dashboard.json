@@ -10,7 +10,11 @@
   },
   "courses": {
     "title": "Courses",
-    "comingSoon": "Courses are coming soon!",
+    "eyebrow": "Empowerment & Skills",
+    "loading": "Loading your enrollments...",
+    "error": "We couldn't load your enrollments. Please try again.",
+    "enrolledCount": "Enrolled in {count, plural, =1 {# course} other {# courses}}",
+    "empty": "You haven't enrolled in a course yet. Explore courses to get started.",
     "explore": "Explore Courses"
   },
   "community": {

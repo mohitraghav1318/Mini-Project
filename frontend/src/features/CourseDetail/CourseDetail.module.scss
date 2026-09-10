@@ -22,6 +22,36 @@
   line-height: 1.6;
 }
 
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.enrollmentAction {
+  display: grid;
+  justify-items: end;
+  gap: 0.45rem;
+  flex: 0 0 auto;
+}
+
+.enrollmentHint,
+.enrollmentError {
+  max-width: 15rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.enrollmentHint {
+  color: var(--color-muted, #76716b);
+}
+
+.enrollmentError {
+  color: var(--color-error);
+}
+
 .learningArea {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);
@@ -96,6 +126,20 @@
 }
 
 @media (max-width: 720px) {
+  .titleRow {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .enrollmentAction {
+    justify-items: start;
+  }
+
+  .enrollmentHint,
+  .enrollmentError {
+    text-align: left;
+  }
+
   .learningArea {
     grid-template-columns: 1fr;
   }
