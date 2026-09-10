@@ -234,3 +234,109 @@ export const deleteLesson = asyncHandler(async (req, res) => {
     data: deletedLesson,
   });
 });
+
+export const enrollInCourse = asyncHandler(async (req, res) => {
+  const courseId = Number(req.params.courseId);
+
+  if (!Number.isInteger(courseId)) {
+    throw new ApiError(404, "Course not found.");
+  }
+
+  if (req.user.role === "ADMIN") {
+    throw new ApiError(403, "Admins cannot enroll in courses.");
+  }
+
+  const course = await prisma.course.findUnique({
+    where: { id: courseId },
+  });
+
+  if (!course) {
+    throw new ApiError(404, "Course not found.");
+  }
+
+  const existingEnrollment = await prisma.enrollment.findUnique({
+    where: {
+      userId_courseId: {
+        userId: req.user.id,
+        courseId,
+      },
+    },
+  });
+
+  if (existingEnrollment) {
+    throw new ApiError(409, "You are already enrolled in this course.");
+  }
+
+  try {
+    const enrollment = await prisma.enrollment.create({
+      data: {
+        userId: req.user.id,
+        courseId,
+      },
+    });
+
+    return res.status(201).json({
+      success: true,
+      data: enrollment,
+    });
+  } catch (error) {
+    if (error?.code === "P2002") {
+      throw new ApiError(409, "You are already enrolled in this course.");
+    }
+
+    throw error;
+  }
+});
+
+export const unenrollFromCourse = asyncHandler(async (req, res) => {
+  const courseId = Number(req.params.courseId);
+
+  if (!Number.isInteger(courseId)) {
+    throw new ApiError(404, "Enrollment not found.");
+  }
+
+  const enrollment = await prisma.enrollment.findUnique({
+    where: {
+      userId_courseId: {
+        userId: req.user.id,
+        courseId,
+      },
+    },
+  });
+
+  if (!enrollment) {
+    throw new ApiError(404, "You are not enrolled in this course.");
+  }
+
+  await prisma.enrollment.delete({
+    where: { id: enrollment.id },
+  });
+
+  return res.status(200).json({
+    success: true,
+    message: "Enrollment removed successfully.",
+  });
+});
+
+export const getEnrollmentStatus = asyncHandler(async (req, res) => {
+  const courseId = Number(req.params.courseId);
+
+  if (!Number.isInteger(courseId)) {
+    throw new ApiError(404, "Course not found.");
+  }
+
+  const enrollment = await prisma.enrollment.findUnique({
+    where: {
+      userId_courseId: {
+        userId: req.user.id,
+        courseId,
+      },
+    },
+    select: { id: true },
+  });
+
+  return res.status(200).json({
+    success: true,
+    data: { enrolled: Boolean(enrollment) },
+  });
+});

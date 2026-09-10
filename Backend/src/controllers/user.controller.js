@@ -1,4 +1,5 @@
 import asyncHandler from "../utils/asyncHandler.js";
+import prisma from "../config/db.js";
 import { validateProfileUpdateInput } from "../utils/validators.js";
 import { updateUserProfile } from "../services/user.service.js";
 import ApiError from "../utils/ApiError.js";
@@ -32,5 +33,30 @@ export const updateProfile = asyncHandler(async (req, res) => {
     success: true,
     message: "Profile updated successfully.",
     data: user,
+  });
+});
+
+export const listMyEnrollments = asyncHandler(async (req, res) => {
+  const enrollments = await prisma.enrollment.findMany({
+    where: { userId: req.user.id },
+    orderBy: { enrolledAt: "desc" },
+    select: {
+      course: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
+    },
+  });
+
+  return res.status(200).json({
+    success: true,
+    data: {
+      enrollments: enrollments.map(({ course }) => ({
+        courseId: course.id,
+        title: course.title,
+      })),
+    },
   });
 });

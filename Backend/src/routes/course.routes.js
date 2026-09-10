@@ -5,7 +5,10 @@ import {
 	createLesson,
 	deleteCourse,
 	deleteLesson,
+	enrollInCourse,
+	getEnrollmentStatus,
 	listCourses,
+	unenrollFromCourse,
 	updateCourse,
 	updateLesson,
 } from "../controllers/course.controller.js";
@@ -29,5 +32,8 @@ router.delete(
 	restrictTo("ADMIN"),
 	deleteLesson
 );
+router.post("/:courseId/enroll", protect, enrollInCourse);
+router.delete("/:courseId/enroll", protect, unenrollFromCourse);
+router.get("/:courseId/enrollment-status", protect, getEnrollmentStatus);
 
 export default router;
