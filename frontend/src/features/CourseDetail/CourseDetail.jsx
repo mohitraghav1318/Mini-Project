@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import Button from "@/components/Button/Button";
 import { useAuth } from "@/context/AuthContext";
 import styles from "./CourseDetail.module.scss";
@@ -10,6 +11,8 @@ import { useCourseEnrollment } from "./hooks/useCourseEnrollment";
 
 export default function CourseDetail({ courseId }) {
   const t = useTranslations("courses");
+  const tCommunity = useTranslations("community");
+  const router = useRouter();
   const { course, isLoading, error } = useCourseDetail(courseId);
   const { user, isLoading: isAuthLoading } = useAuth();
   const {
@@ -62,6 +65,14 @@ export default function CourseDetail({ courseId }) {
                 onClick={toggleEnrollment}
               >
                 {isEnrolled ? t("detail.unenroll") : t("detail.enroll")}
+              </Button>
+            )}
+            {(user?.role === "ADMIN" || isEnrolled) && (
+              <Button
+                variant="secondary"
+                onClick={() => router.push(`/courses/${courseId}/community`)}
+              >
+                {tCommunity("openCommunity")}
               </Button>
             )}
             {enrollmentError && (

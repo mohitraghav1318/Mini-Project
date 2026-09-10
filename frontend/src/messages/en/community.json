@@ -1,0 +1,22 @@
+{
+  "title": "Course community",
+  "description": "Share questions, ideas, and encouragement with fellow learners.",
+  "openCommunity": "Open community",
+  "loading": "Loading community...",
+  "enrollmentError": "We couldn't check your enrollment. Please try again.",
+  "gate": "You must enroll in this course to join its community.",
+  "backToCourse": "Back to course",
+  "postPlaceholder": "Share something with the community",
+  "postSubmit": "Post",
+  "commentPlaceholder": "Write a comment",
+  "commentSubmit": "Comment",
+  "empty": "Be the first to post.",
+  "feedLabel": "Community posts",
+  "viewComments": "View comments ({count})",
+  "commentsLoading": "Loading comments...",
+  "delete": "Delete",
+  "confirm": {
+    "deletePost": "Delete this post?",
+    "deleteComment": "Delete this comment?"
+  }
+}
