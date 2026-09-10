@@ -5,10 +5,14 @@ import {
 	createLesson,
 	deleteCourse,
 	deleteLesson,
+	enrollInCourse,
+	getEnrollmentStatus,
 	listCourses,
+	unenrollFromCourse,
 	updateCourse,
 	updateLesson,
 } from "../controllers/course.controller.js";
+import { createCoursePost, listCoursePosts } from "../controllers/community.controller.js";
 
 const router = Router();
 
@@ -29,5 +33,10 @@ router.delete(
 	restrictTo("ADMIN"),
 	deleteLesson
 );
+router.post("/:courseId/enroll", protect, enrollInCourse);
+router.delete("/:courseId/enroll", protect, unenrollFromCourse);
+router.get("/:courseId/enrollment-status", protect, getEnrollmentStatus);
+router.get("/:courseId/posts", protect, listCoursePosts);
+router.post("/:courseId/posts", protect, createCoursePost);
 
 export default router;

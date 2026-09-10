@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { createCourse } from "@/lib/courseApi";
+import { createCourse, updateCourse } from "@/lib/courseApi";
 
 const initialForm = {
   title: "",
@@ -10,9 +10,9 @@ const initialForm = {
   category: "",
 };
 
-export function useCourseForm(onSuccess) {
+export function useCourseForm(initialCourse, onSuccess) {
   const t = useTranslations("adminCourses");
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState(initialCourse || initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -35,10 +35,12 @@ export function useCourseForm(onSuccess) {
     setSuccess(false);
 
     try {
-      await createCourse(form);
-      setForm(initialForm);
+      const response = initialCourse
+        ? await updateCourse(initialCourse.id, form)
+        : await createCourse(form);
+      setForm(initialCourse || initialForm);
       setSuccess(true);
-      onSuccess?.();
+      onSuccess?.(response?.data);
     } catch (err) {
       setError(err.message || t("form.error"));
     } finally {

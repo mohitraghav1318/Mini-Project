@@ -11,6 +11,7 @@ import { useAdminCourses } from "./hooks/useAdminCourses";
 export default function AdminCourses() {
   const { user, isLoading } = useAdminCourses();
   const [courseListVersion, setCourseListVersion] = useState(0);
+  const [editingCourse, setEditingCourse] = useState(null);
   const t = useTranslations(ADMIN_COURSES_NAMESPACE);
 
   if (isLoading) {
@@ -21,17 +22,24 @@ export default function AdminCourses() {
     return null;
   }
 
-  function handleCourseCreated() {
+  function handleCourseSaved() {
+    setEditingCourse(null);
     setCourseListVersion((version) => version + 1);
   }
 
   return (
     <main className={styles.page}>
       <h1>{t("title")}</h1>
-      <CourseForm onSuccess={handleCourseCreated} />
+      <CourseForm
+        key={editingCourse?.id || "create"}
+        initialCourse={editingCourse}
+        onSuccess={handleCourseSaved}
+        onCancel={() => setEditingCourse(null)}
+      />
       <CourseList
         refreshTrigger={courseListVersion}
-        onLessonAdded={handleCourseCreated}
+        onLessonAdded={() => setCourseListVersion((version) => version + 1)}
+        onEditCourse={setEditingCourse}
       />
     </main>
   );

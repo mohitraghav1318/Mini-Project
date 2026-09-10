@@ -5,12 +5,10 @@ import { updateProfile } from "@/lib/userApi";
 
 export function useEditProfileForm(user, onSuccess) {
   const [formValues, setFormValues] = useState({
-    bio: user.bio ?? "",
+    shgName: user.shgName ?? "",
     district: user.district ?? "",
     state: user.state ?? "",
-    workPreference: user.workPreference ?? "",
-    // Pre-fill with the ids of interests the user already has
-    interestIds: user.interests?.map((i) => i.id) ?? [],
+    occupation: user.occupation ?? "",
   });
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState(null);

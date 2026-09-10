@@ -2,6 +2,7 @@
 
 import styles from './Navbar.module.scss';
 import { Link } from '@/i18n/navigation';
+// import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
 import { useAuth } from '@/context/AuthContext';
@@ -10,7 +11,7 @@ export default function Navbar() {
   const t = useTranslations('common');
   const { user, isLoading, logout } = useAuth();
 
-  return (
+return (
     <nav className={styles.navbar}>
       <Link href="/" className={styles.brand}>
         {t('appName')}
@@ -21,7 +22,9 @@ export default function Navbar() {
 
         {isLoading ? null : user ? (
           <div className={styles.userSection}>
-            <span className={styles.userName}>{user.name}</span>
+            <Link href="/dashboard" className={styles.userName}>
+              {user.name}
+            </Link>
             <button className={styles.logoutBtn} onClick={logout}>
               {t('logout')}
             </button>

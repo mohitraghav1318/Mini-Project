@@ -50,6 +50,9 @@ model User {
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
   courses          Course[]
+  enrollments      Enrollment[]
+  posts            Post[]
+  comments         Comment[]
 }
 
 model Course {
@@ -61,6 +64,8 @@ model Course {
   admin       User       @relation(fields: [createdBy], references: [id])
   createdAt   DateTime   @default(now())
   lessons     Lesson[]
+  enrollments Enrollment[]
+  posts       Post[]
 }
 
 model Lesson {
@@ -73,4 +78,39 @@ model Lesson {
   videoId      String
   thumbnailUrl String?
   createdAt    DateTime @default(now())
+}
+
+model Enrollment {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  courseId   Int
+  enrolledAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  courseId  Int
+  authorId  Int
+  content   String
+  createdAt DateTime  @default(now())
+
+  course   Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  author   User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  authorId  Int
+  content   String
+  createdAt DateTime @default(now())
+
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }

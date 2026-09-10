@@ -2,15 +2,21 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import Card from "@/components/Card/Card";
 import Button from "@/components/Button/Button";
 import EditProfileForm from "./components/EditProfileForm/EditProfileForm";
 import styles from "./Dashboard.module.scss";
 import { useDashboard } from "./hooks/useDashboard";
+import { useDashboardEnrollments } from "./hooks/useDashboardEnrollments";
 
 export default function Dashboard() {
   const { user, isLoading, error, refreshUser, setUser } = useDashboard();
+  const {
+    enrollments,
+    isLoading: areEnrollmentsLoading,
+    error: enrollmentsError,
+  } = useDashboardEnrollments(Boolean(user) && !isLoading);
   const [isEditing, setIsEditing] = useState(false);
   const t = useTranslations("dashboard");
   const tStates = useTranslations("states");
@@ -90,37 +96,34 @@ export default function Dashboard() {
                 </Card>
                 <Card className={styles.courseCard}>
                   <div>
-                    <span className={styles.courseEyebrow}>Empowerment &amp; Skills</span>
+                    <span className={styles.courseEyebrow}>{t("courses.eyebrow")}</span>
                     <h3 className={styles.cardTitle}>{t("courses.title")}</h3>
                   </div>
-                  {/* Stub for enrollment status */}
-                  {false ? (
+                  {areEnrollmentsLoading ? (
+                    <p className={styles.cardText} role="status">{t("courses.loading")}</p>
+                  ) : enrollmentsError ? (
+                    <p className={styles.cardError} role="alert">{t("courses.error")}</p>
+                  ) : enrollments.length > 0 ? (
                     <>
-                      <p className={styles.cardText}>{t("courses.enrolledTitle")}</p>
+                      <p className={styles.cardText}>
+                        {t("courses.enrolledCount", { count: enrollments.length })}
+                      </p>
                       <div className={styles.courseList}>
-                        <div className={styles.courseItem}>
-                          <span>{t("courses.course1")}</span>
-                          <Button 
-                            onClick={() => router.push(`/courses/1`)}
-                            className={styles.buttonLink}
+                        {enrollments.map((enrollment) => (
+                          <Link
+                            className={styles.courseItem}
+                            key={enrollment.courseId}
+                            href={`/courses/${enrollment.courseId}`}
                           >
-                            {t("courses.continue")}
-                          </Button>
-                        </div>
-                        <div className={styles.courseItem}>
-                          <span>{t("courses.course2")}</span>
-                          <Button 
-                            onClick={() => router.push(`/courses/2`)}
-                            className={styles.buttonLink}
-                          >
-                            {t("courses.continue")}
-                          </Button>
-                        </div>
+                            <span>{enrollment.title}</span>
+                            <span className={styles.courseArrow} aria-hidden="true">&#8250;</span>
+                          </Link>
+                        ))}
                       </div>
                     </>
                   ) : (
                     <>
-                      <p className={styles.cardText}>{t("courses.comingSoon")}</p>
+                      <p className={styles.cardText}>{t("courses.empty")}</p>
                       <Button onClick={() => router.push(`/courses`)} className={styles.buttonLink}>
                         {t("courses.explore")}
                         <span aria-hidden="true">&#8250;</span>
