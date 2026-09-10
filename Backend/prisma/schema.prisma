@@ -51,6 +51,8 @@ model User {
   updatedAt        DateTime   @updatedAt
   courses          Course[]
   enrollments      Enrollment[]
+  posts            Post[]
+  comments         Comment[]
 }
 
 model Course {
@@ -63,6 +65,7 @@ model Course {
   createdAt   DateTime   @default(now())
   lessons     Lesson[]
   enrollments Enrollment[]
+  posts       Post[]
 }
 
 model Lesson {
@@ -87,4 +90,27 @@ model Enrollment {
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   @@unique([userId, courseId])
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  courseId  Int
+  authorId  Int
+  content   String
+  createdAt DateTime  @default(now())
+
+  course   Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  author   User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  authorId  Int
+  content   String
+  createdAt DateTime @default(now())
+
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }
