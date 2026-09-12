@@ -6,26 +6,29 @@ import Card from "@/components/Card/Card";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import FormMessage from "@/components/FormMessage/FormMessage";
-import styles from "./Login.module.scss";
-import { loginData } from "./data/login.data";
+import { useTranslations } from "next-intl";
 import { useLogin } from "./hooks/useLogin";
 
 export default function Login() {
+  const t = useTranslations("register");
   const { form, fieldErrors, formError, isSubmitting, handleChange, handleSubmit } =
     useLogin();
 
   return (
-    <AuthLayout heading={loginData.heading} subheading={loginData.subheading}>
+    <AuthLayout heading={t("heading")} subheading={t("subheading")}>
       <Card>
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
-          <h1 className={styles.title}>Log in</h1>
+          <h1 className={styles.title}>{t("submitLabel")}</h1>
 
           <FormMessage type="error" message={formError} />
 
-          {loginData.form.fields.map((field) => (
+          {t("form.fields").map((field, index) => (
             <Input
-              key={field.name}
-              {...field}
+              key={index}
+              name={field.name}
+              label={t(`form.fields.${index}.label`)}
+              type={field.type}
+              placeholder={t(`form.fields.${index}.placeholder`)}
               value={form[field.name]}
               onChange={handleChange}
               error={fieldErrors[field.name]}
@@ -33,19 +36,19 @@ export default function Login() {
           ))}
 
           <Button type="submit" isLoading={isSubmitting} fullWidth>
-  {loginData.form.submitLabel}
-</Button>
+            {t("form.submitLabel")}
+          </Button>
 
-<p className={styles.forgotPasswordText}>
-  <Link href={loginData.forgotPassword.linkHref} className={styles.footerLink}>
-    {loginData.forgotPassword.text}
-  </Link>
-</p>
+          <p className={styles.forgotPasswordText}>
+            <Link href={t("forgotPassword.linkHref")} className={styles.footerLink}>
+              {t("forgotPassword.text")}
+            </Link>
+          </p>
 
           <p className={styles.footerText}>
-            {loginData.footer.text}{" "}
-            <Link href={loginData.footer.linkHref} className={styles.footerLink}>
-              {loginData.footer.linkLabel}
+            {t("footer.text")}{" "}
+            <Link href={t("footer.linkHref")} className={styles.footerLink}>
+              {t("footer.linkLabel")}
             </Link>
           </p>
         </form>
