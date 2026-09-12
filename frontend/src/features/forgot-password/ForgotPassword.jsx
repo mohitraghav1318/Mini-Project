@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import AuthLayout from "@/components/AuthLayout/AuthLayout";
 import Card from "@/components/Card/Card";
 import Input from "@/components/Input/Input";
