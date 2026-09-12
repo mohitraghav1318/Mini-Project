@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import Card from "@/components/Card/Card";
 import Button from "@/components/Button/Button";
-import styles from "./dashboard.module.scss";
+// import styles from "@/features/dashboard/dashboard.module.scss";
 
 export default function CommunityPage() {
   const t = useTranslations("dashboard");
