@@ -22,6 +22,10 @@ export function listCourses() {
   return apiFetch("/api/courses", { method: "GET" });
 }
 
+export function getCourseById(courseId) {
+  return apiFetch(`/api/courses/${courseId}`, { method: "GET" });
+}
+
 export async function getCourse(courseId) {
   const response = await listCourses();
   const course = response?.data?.find(

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import CourseForm from "./components/CourseForm/CourseForm";
 import CourseList from "./components/CourseList/CourseList";
 import styles from "./AdminCourses.module.scss";
@@ -10,8 +10,7 @@ import { useAdminCourses } from "./hooks/useAdminCourses";
 
 export default function AdminCourses() {
   const { user, isLoading } = useAdminCourses();
-  const [courseListVersion, setCourseListVersion] = useState(0);
-  const [editingCourse, setEditingCourse] = useState(null);
+  const router = useRouter();
   const t = useTranslations(ADMIN_COURSES_NAMESPACE);
 
   if (isLoading) {
@@ -22,25 +21,17 @@ export default function AdminCourses() {
     return null;
   }
 
-  function handleCourseSaved() {
-    setEditingCourse(null);
-    setCourseListVersion((version) => version + 1);
+  function handleCourseCreated(course) {
+    router.push(`/admin/courses/${course.id}`);
   }
 
   return (
     <main className={styles.page}>
       <h1>{t("title")}</h1>
       <CourseForm
-        key={editingCourse?.id || "create"}
-        initialCourse={editingCourse}
-        onSuccess={handleCourseSaved}
-        onCancel={() => setEditingCourse(null)}
+        onSuccess={handleCourseCreated}
       />
-      <CourseList
-        refreshTrigger={courseListVersion}
-        onLessonAdded={() => setCourseListVersion((version) => version + 1)}
-        onEditCourse={setEditingCourse}
-      />
+      <CourseList />
     </main>
   );
 }

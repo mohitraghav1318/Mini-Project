@@ -6,6 +6,7 @@ import {
 	deleteCourse,
 	deleteLesson,
 	enrollInCourse,
+	getCourseById,
 	getEnrollmentStatus,
 	listCourses,
 	unenrollFromCourse,
@@ -17,6 +18,7 @@ import { createCoursePost, listCoursePosts } from "../controllers/community.cont
 const router = Router();
 
 router.get("/", listCourses);
+router.get("/:courseId", getCourseById);
 router.post("/", protect, restrictTo("ADMIN"), createCourse);
 router.put("/:courseId", protect, restrictTo("ADMIN"), updateCourse);
 router.delete("/:courseId", protect, restrictTo("ADMIN"), deleteCourse);
