@@ -1,0 +1,23 @@
+{
+  "heading": "Welcome back",
+  "subheading": "Log in to continue your journey",
+  "title": "Log In",
+  "labels": {
+    "email": "Email",
+    "password": "Password"
+  },
+  "placeholders": {
+    "email": "Enter your email",
+    "password": "Enter your password"
+  },
+  "submitLabel": "Log In",
+  "forgotPassword": {
+    "linkHref": "/forgot-password",
+    "text": "Forgot your password?"
+  },
+  "footer": {
+    "text": "Don't have an account?",
+    "linkHref": "/register",
+    "linkLabel": "Sign up"
+  }
+}

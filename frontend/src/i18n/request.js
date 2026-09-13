@@ -6,7 +6,7 @@ import path from 'path';
 // list every message file here as we add new ones —
 // each filename becomes the namespace key components use,
 // e.g. useTranslations('register') reads from register.json
-const namespaces = ['common', 'occupations', 'states', 'register', 'dashboard', 'adminCourses', 'courses', 'community'];
+const namespaces = ['common', 'occupations', 'states', 'register', 'dashboard', 'adminCourses', 'courses', 'community', 'login'];
 
 export default getRequestConfig(async ({ requestLocale }) => {
   console.log(`request.js: top of function`);
