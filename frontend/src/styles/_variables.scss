@@ -9,7 +9,14 @@
   --color-alta: #a13d3d;
   --color-leaf: #5c7a52;
 
-  // Semantic aliases (use these in components instead of raw colors above)
+  // New — Seekho Didi-inspired redesign palette
+  --color-forest: #1e5c35;
+  --color-forest-light: #2d7a45;
+  --color-saffron: #f47920;
+  --color-saffron-dark: #d4621a;
+  --color-cream: #fdf6e3;
+
+  // Semantic aliases
   --color-border: rgba(43, 38, 32, 0.12);
   --color-error: #a13d3d;
   --color-success: #5c7a52;
@@ -17,9 +24,11 @@
   // Radius scale
   --radius-sm: 8px;
   --radius-md: 14px;
+  --radius-lg: 20px;
   --radius-pill: 999px;
 
   // Shadow scale
   --shadow-sm: 0 2px 10px rgba(43, 38, 32, 0.06);
   --shadow-md: 0 10px 24px rgba(43, 38, 32, 0.1);
+  --shadow-lg: 0 16px 40px rgba(43, 38, 32, 0.14);
 }

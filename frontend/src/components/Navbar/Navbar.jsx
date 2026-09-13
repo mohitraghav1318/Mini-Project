@@ -2,7 +2,6 @@
 
 import styles from './Navbar.module.scss';
 import { Link } from '@/i18n/navigation';
-// import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
 import { useAuth } from '@/context/AuthContext';
@@ -11,30 +10,44 @@ export default function Navbar() {
   const t = useTranslations('common');
   const { user, isLoading, logout } = useAuth();
 
-return (
-    <nav className={styles.navbar}>
-      <Link href="/" className={styles.brand}>
-        {t('appName')}
-      </Link>
-
-      <div className={styles.actions}>
-        <LanguageSwitcher />
-
-        {isLoading ? null : user ? (
-          <div className={styles.userSection}>
-            <Link href="/dashboard" className={styles.userName}>
-              {user.name}
-            </Link>
-            <button className={styles.logoutBtn} onClick={logout}>
-              {t('logout')}
-            </button>
-          </div>
-        ) : (
-          <Link href="/login" className={styles.getStarted}>
-            {t('getStarted')}
-          </Link>
-        )}
+  return (
+    <header className={styles.header}>
+      {/* Top strip */}
+      <div className={styles.topStrip}>
+        <span>🇮🇳 महिला सशक्तिकरण मंच — ग्रामीण महिलाओं के लिए</span>
       </div>
-    </nav>
+
+      {/* Main navbar */}
+      <nav className={styles.navbar}>
+        <Link href="/" className={styles.brand}>
+          <span className={styles.brandIcon} aria-hidden="true">🌸</span>
+          <span className={styles.brandText}>{t('appName')}</span>
+        </Link>
+
+        <div className={styles.actions}>
+          <LanguageSwitcher />
+
+          {isLoading ? null : user ? (
+            <div className={styles.userSection}>
+              <Link href="/dashboard" className={styles.userName}>
+                👤 {user.name}
+              </Link>
+              <button className={styles.logoutBtn} onClick={logout}>
+                {t('logout')}
+              </button>
+            </div>
+          ) : (
+            <div className={styles.authButtons}>
+              <Link href="/login" className={styles.loginBtn}>
+                {t('login')}
+              </Link>
+              <Link href="/register" className={styles.registerBtn}>
+                {t('register')}
+              </Link>
+            </div>
+          )}
+        </div>
+      </nav>
+    </header>
   );
 }

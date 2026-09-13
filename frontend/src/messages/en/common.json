@@ -5,5 +5,7 @@
   "save": "Save",
   "cancel": "Cancel",
   "getStarted": "Get Started",
-  "logout": "Log out"
-}
+  "logout": "Log out",
+  "login": "Login",
+  "register": "Sign Up"
+}
