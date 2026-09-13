@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
 
 export async function apiFetch(path, options = {}) {
   const res = await fetch(`${API_URL}${path}`, {
