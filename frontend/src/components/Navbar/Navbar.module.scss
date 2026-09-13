@@ -55,7 +55,34 @@
   color: var(--color-forest);
 }
 
-// ── Actions ────────────────────────────────────────────────────────────────
+// ── Nav links (centre) ─────────────────────────────────────────────────────
+.navLinks {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+}
+
+.navLink {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba(30, 92, 53, 0.08);
+    color: var(--color-forest);
+  }
+}
+
+
 .actions {
   display: flex;
   align-items: center;

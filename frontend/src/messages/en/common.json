@@ -7,5 +7,9 @@
   "getStarted": "Get Started",
   "logout": "Log out",
   "login": "Login",
-  "register": "Sign Up"
-}
+  "register": "Sign Up",
+  "courses": "Courses",
+  "community": "Community",
+  "dashboard": "Dashboard"
+}
+

@@ -19,11 +19,30 @@ export default function Navbar() {
 
       {/* Main navbar */}
       <nav className={styles.navbar}>
+        {/* Brand */}
         <Link href="/" className={styles.brand}>
           <span className={styles.brandIcon} aria-hidden="true">🌸</span>
           <span className={styles.brandText}>{t('appName')}</span>
         </Link>
 
+        {/* Nav links */}
+        <div className={styles.navLinks}>
+          <Link href="/courses" className={styles.navLink}>
+            📚 {t('courses')}
+          </Link>
+          {user && (
+            <Link href="/community" className={styles.navLink}>
+              👥 {t('community')}
+            </Link>
+          )}
+          {user && (
+            <Link href="/dashboard" className={styles.navLink}>
+              {t('dashboard')}
+            </Link>
+          )}
+        </div>
+
+        {/* Right-side actions */}
         <div className={styles.actions}>
           <LanguageSwitcher />
 

@@ -32,7 +32,7 @@ export default async function LocaleLayout({ children, params }) {
   return (
   <html lang={locale} className={mukta.variable}>
     <body style={{ '--font-display': 'var(--font-body)' }}>
-      <NextIntlClientProvider messages={messages}>
+      <NextIntlClientProvider messages={messages} locale={locale}>
         <AuthProvider>
           <Navbar />
           {children}
@@ -41,4 +41,4 @@ export default async function LocaleLayout({ children, params }) {
     </body>
   </html>
 );
-}
+}

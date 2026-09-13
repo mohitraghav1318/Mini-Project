@@ -1,12 +1,13 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import styles from "./Home.module.scss";
-import { homeData } from "./data/home.data";
+import { getHomeData } from "./data/home.data";
+import { useLocale } from 'next-intl';
 
 // ── Hero Carousel ──────────────────────────────────────────────────────────
-function HeroCarousel({ slides }) {
+function HeroCarousel({ slides, chips }) {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef(null);
 
@@ -21,12 +22,13 @@ function HeroCarousel({ slides }) {
     return () => clearInterval(timerRef.current);
   }, [slides.length]);
 
+  if (!slides || slides.length === 0) return null;
   const slide = slides[current];
   const textClass = slide.textLight ? styles.lightText : styles.darkText;
 
   return (
     <section className={styles.hero} style={{ background: slide.bg }}>
-      <div className={`${styles.heroInner} ${textClass}`}>
+      <div className={"" + styles.heroInner + " " + textClass}>
         <div className={styles.heroText}>
           <span className={styles.eyebrow}>{slide.eyebrow}</span>
           <h1>
@@ -36,7 +38,7 @@ function HeroCarousel({ slides }) {
             </span>
           </h1>
           <p>{slide.subheading}</p>
-          <Link href="/register" className={`${styles.heroCta} ${slide.textLight ? styles.heroCtaLight : styles.heroCtaDark}`}>
+          <Link href="/register" className={"" + styles.heroCta + " " + (slide.textLight ? styles.heroCtaLight : styles.heroCtaDark)}>
             {slide.cta} →
           </Link>
         </div>
@@ -46,8 +48,8 @@ function HeroCarousel({ slides }) {
       </div>
 
       {/* Arrows */}
-      <button className={`${styles.arrow} ${styles.arrowLeft}`} onClick={() => goTo(current - 1)} aria-label="Previous slide">‹</button>
-      <button className={`${styles.arrow} ${styles.arrowRight}`} onClick={() => goTo(current + 1)} aria-label="Next slide">›</button>
+      <button className={"" + styles.arrow + " " + styles.arrowLeft} onClick={() => goTo(current - 1)} aria-label="Previous slide">‹</button>
+      <button className={"" + styles.arrow + " " + styles.arrowRight} onClick={() => goTo(current + 1)} aria-label="Next slide">›</button>
 
       {/* Dots */}
       <div className={styles.dots} role="tablist">
@@ -56,16 +58,16 @@ function HeroCarousel({ slides }) {
             key={i}
             role="tab"
             aria-selected={i === current}
-            className={`${styles.dot} ${i === current ? styles.dotActive : ""}`}
+            className={"" + styles.dot + " " + (i === current ? styles.dotActive : "")}
             onClick={() => goTo(i)}
-            aria-label={`Slide ${i + 1}`}
+            aria-label={"Slide " + (i + 1)}
           />
         ))}
       </div>
 
       {/* Feature chips */}
       <div className={styles.chips} aria-hidden="true">
-        {homeData.chips.map((chip) => (
+        {chips && chips.map((chip) => (
           <span key={chip.label} className={styles.chip}>
             <span>{chip.icon}</span>
             {chip.label}
@@ -80,7 +82,7 @@ function HeroCarousel({ slides }) {
 function StatsBar({ stats }) {
   return (
     <section className={styles.statsBar} aria-label="Platform statistics">
-      {stats.map((stat, i) => (
+      {stats && stats.map((stat, i) => (
         <div key={i} className={styles.statItem}>
           <span className={styles.statIcon}>{stat.icon}</span>
           <strong className={styles.statNumber} style={{ color: stat.color }}>{stat.number}</strong>
@@ -99,21 +101,45 @@ function CommunityCard({ thumbnail, category, title, href }) {
         <span className={styles.categoryTag}>{category}</span>
       </div>
       <div className={styles.cardBody}>
-        <Link href={href || "/community"} className={styles.cardTitle}>{title}</Link>
+        <Link href={href || "/courses"} className={styles.cardTitle}>{title}</Link>
       </div>
     </div>
   );
 }
 
+// ── Community Banner (home page shortcut) ──────────────────────────────────
+function CommunityBanner({ banner }) {
+  if (!banner) return null;
+  return (
+    <section className={styles.communityBanner}>
+      <div className={styles.communityBannerInner}>
+        <div className={styles.communityBannerText}>
+          <h2>{banner.heading}</h2>
+          <p>{banner.description}</p>
+        </div>
+        <div className={styles.communityBannerActions}>
+          <Link href="/community" className={styles.communityBannerBtn}>
+            {banner.primaryBtn}
+          </Link>
+          <Link href="/register" className={styles.communityBannerSecondary}>
+            {banner.secondaryBtn}
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Communities Row ────────────────────────────────────────────────────────
 function CommunitiesRow({ headingMain, headingAccent, communities, viewAllHref }) {
+  if (!communities) return null;
   return (
     <section className={styles.communitiesSection}>
       <div className={styles.sectionHeader}>
         <h2>
           {headingMain} <span className={styles.saffronText}>{headingAccent}</span>
         </h2>
-        <Link href={viewAllHref || "/community"} className={styles.viewAllBtn}>View All &gt;</Link>
+        <Link href={viewAllHref || "/courses"} className={styles.viewAllBtn}>View All &gt;</Link>
       </div>
       <div className={styles.cardsWrapper}>
         <div className={styles.cardsRow}>
@@ -127,11 +153,12 @@ function CommunitiesRow({ headingMain, headingAccent, communities, viewAllHref }
 }
 
 // ── How To Join ────────────────────────────────────────────────────────────
-function HowToJoin({ steps }) {
+function HowToJoin({ steps, headings }) {
+  if (!steps || !headings) return null;
   return (
     <section className={styles.howToSection}>
       <h2 className={styles.howToHeading}>
-        समूह से कैसे <span className={styles.saffronText}>जुड़ें?</span>
+        {headings.howToJoin} <span className={styles.saffronText}>{headings.howToJoinAccent}</span>
       </h2>
       <div className={styles.stepsGrid}>
         {steps.map((step, i) => (
@@ -149,17 +176,18 @@ function HowToJoin({ steps }) {
 }
 
 // ── Cluster Grid ───────────────────────────────────────────────────────────
-function ClusterGrid({ clusters }) {
+function ClusterGrid({ clusters, headings }) {
+  if (!clusters || !headings) return null;
   return (
     <section className={styles.clusterSection}>
-      <h2>अपना <span className={styles.saffronText}>समूह</span> चुनें</h2>
+      <h2>{headings.chooseGroup} <span className={styles.saffronText}>{headings.chooseGroupAccent}</span> {headings.chooseGroupEnd}</h2>
       <div className={styles.clusterGrid}>
         {clusters.map((cluster, i) => (
           <div key={i} className={styles.clusterCard}>
             <span className={styles.clusterEmoji} aria-hidden="true">{cluster.emoji}</span>
             <h3>{cluster.name}</h3>
-            <span className={styles.memberCount}>👥 {cluster.members} सदस्य</span>
-            <Link href="/register" className={styles.joinBtn}>जुड़ें</Link>
+            <span className={styles.memberCount}>👥 {cluster.members}</span>
+            <Link href="/register" className={styles.joinBtn}>➔</Link>
           </div>
         ))}
       </div>
@@ -169,6 +197,7 @@ function ClusterGrid({ clusters }) {
 
 // ── Testimonial ────────────────────────────────────────────────────────────
 function Testimonial({ quote, author, location }) {
+  if (!quote) return null;
   return (
     <section className={styles.testimonial} aria-label="Success story">
       <div className={styles.testimonialInner}>
@@ -181,18 +210,20 @@ function Testimonial({ quote, author, location }) {
 }
 
 // ── FAQ ────────────────────────────────────────────────────────────────────
-function FAQ({ questions }) {
+function FAQ({ questions, headings }) {
   const [openIndex, setOpenIndex] = useState(null);
   const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
+
+  if (!questions || !headings) return null;
 
   return (
     <section className={styles.faqSection}>
       <h2>
-        अक्सर पूछे जाने वाले <span className={styles.saffronText}>सवाल</span>
+        {headings.faq} <span className={styles.saffronText}>{headings.faqAccent}</span>
       </h2>
       <div className={styles.faqList}>
         {questions.map((q, i) => (
-          <div key={i} className={`${styles.faqItem} ${openIndex === i ? styles.faqItemOpen : ""}`}>
+          <div key={i} className={"" + styles.faqItem + " " + (openIndex === i ? styles.faqItemOpen : "")}>
             <button
               className={styles.faqQuestion}
               onClick={() => toggle(i)}
@@ -216,62 +247,71 @@ function FAQ({ questions }) {
 
 // ── Home Page ──────────────────────────────────────────────────────────────
 export default function Home() {
+  const locale = useLocale();
+  const homeData = getHomeData(locale);
+  
+  if (!homeData) return null;
+
   const {
-    hero, stats,
+    hero, chips, stats,
     popularCommunities, newCommunities,
-    steps, clusters, testimonial, faq, cta, footer,
+    steps, clusters, testimonial, faq, cta, footer, banner, headings
   } = homeData;
 
   return (
     <main className={styles.home}>
-      <HeroCarousel slides={hero.slides} />
-      <StatsBar stats={stats} />
+      <HeroCarousel slides={hero?.slides || []} chips={chips || []} />
+      <StatsBar stats={stats || []} />
+      <CommunityBanner banner={banner} />
       <CommunitiesRow
-        headingMain="लोकप्रिय"
-        headingAccent="Communities"
+        headingMain={headings?.popular}
+        headingAccent={headings?.courses}
         communities={popularCommunities}
-        viewAllHref="/community"
+        viewAllHref="/courses"
       />
       <CommunitiesRow
-        headingMain="नई"
-        headingAccent="Communities"
+        headingMain={headings?.new}
+        headingAccent={headings?.courses}
         communities={newCommunities}
-        viewAllHref="/community"
+        viewAllHref="/courses"
       />
-      <HowToJoin steps={steps} />
-      <ClusterGrid clusters={clusters} />
+      <HowToJoin steps={steps} headings={headings} />
+      <ClusterGrid clusters={clusters} headings={headings} />
       <Testimonial {...testimonial} />
-      <FAQ questions={faq} />
+      <FAQ questions={faq} headings={headings} />
 
       {/* CTA Band */}
-      <section className={styles.ctaBand}>
-        <h2>{cta.heading}</h2>
-        <Link href="/register" className={styles.ctaBtn}>{cta.button}</Link>
-      </section>
+      {cta && (
+        <section className={styles.ctaBand}>
+          <h2>{cta.heading}</h2>
+          <Link href="/register" className={styles.ctaBtn}>{cta.button}</Link>
+        </section>
+      )}
 
       {/* Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.footerGrid}>
-          <div className={styles.footerCol}>
-            <span className={styles.footerLogo}>{footer.logo}</span>
-            <p>{footer.tagline}</p>
+      {footer && (
+        <footer className={styles.footer}>
+          <div className={styles.footerGrid}>
+            <div className={styles.footerCol}>
+              <span className={styles.footerLogo}>{footer.logo}</span>
+              <p>{footer.tagline}</p>
+            </div>
+            <div className={styles.footerCol}>
+              <h4>Quick Links</h4>
+              {footer.links && footer.links.map((l, i) => (
+                <Link key={i} href={l.href} className={styles.footerLink}>{l.label}</Link>
+              ))}
+            </div>
+            <div className={styles.footerCol}>
+              <h4>Help &amp; Support</h4>
+              {footer.support && footer.support.map((l, i) => (
+                <Link key={i} href={l.href} className={styles.footerLink}>{l.label}</Link>
+              ))}
+            </div>
           </div>
-          <div className={styles.footerCol}>
-            <h4>Quick Links</h4>
-            {footer.links.map((l, i) => (
-              <Link key={i} href={l.href} className={styles.footerLink}>{l.label}</Link>
-            ))}
-          </div>
-          <div className={styles.footerCol}>
-            <h4>Help &amp; Support</h4>
-            {footer.support.map((l, i) => (
-              <Link key={i} href={l.href} className={styles.footerLink}>{l.label}</Link>
-            ))}
-          </div>
-        </div>
-        <p className={styles.copyright}>© {new Date().getFullYear()} {footer.logo}. All rights reserved.</p>
-      </footer>
+          <p className={styles.copyright}>© {new Date().getFullYear()} {footer.logo}. All rights reserved.</p>
+        </footer>
+      )}
     </main>
   );
 }
-
