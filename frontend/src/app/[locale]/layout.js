@@ -1,5 +1,4 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Mukta } from 'next/font/google';
@@ -7,6 +6,7 @@ import '../globals.scss';
 
 import Navbar from '@/components/Navbar/Navbar';
 import { AuthProvider } from '@/context/AuthContext';
+import getRequestConfig from '@/i18n/request.js';
 
 // Mukta-only per the font decision — Rozha One dropped since its
 // Devanagari support was unconfirmed and it fought the simple-theme goal.
@@ -21,24 +21,31 @@ const mukta = Mukta({
 });
 
 export default async function LocaleLayout({ children, params }) {
+  console.log(`LocaleLayout: top of function, params:`, params);
   const { locale } = await params;
 
   if (!routing.locales.includes(locale)) {
     notFound();
   }
 
-  const messages = await getMessages();
+  // Call the request config function directly to get the messages for the locale
+  const { messages } = await getRequestConfig({
+    requestLocale: Promise.resolve(locale)
+  });
+
+  console.log(`LocaleLayout: locale=${locale}, messages=`);
+  console.log(messages);
 
   return (
-  <html lang={locale} className={mukta.variable}>
-    <body style={{ '--font-display': 'var(--font-body)' }}>
-      <NextIntlClientProvider messages={messages}>
-        <AuthProvider>
-          <Navbar />
-          {children}
-        </AuthProvider>
-      </NextIntlClientProvider>
-    </body>
-  </html>
-);
+    <html lang={locale} className={mukta.variable}>
+      <body style={{ '--font-display': 'var(--font-body)' }}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <AuthProvider>
+            <Navbar />
+            {children}
+          </AuthProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
 }

@@ -1,51 +1,98 @@
 "use client";
 
 import Link from "next/link";
+
 import AuthLayout from "@/components/AuthLayout/AuthLayout";
 import Card from "@/components/Card/Card";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import FormMessage from "@/components/FormMessage/FormMessage";
-import styles from "./Login.module.scss";
-import { loginData } from "./data/login.data";
+
+import { useTranslations } from "next-intl";
 import { useLogin } from "./hooks/useLogin";
 
+import styles from "./Login.module.scss";
+
 export default function Login() {
-  const { form, fieldErrors, formError, isSubmitting, handleChange, handleSubmit } =
-    useLogin();
+  const t = useTranslations("login");
+
+  const {
+    form,
+    fieldErrors,
+    formError,
+    isSubmitting,
+    handleChange,
+    handleSubmit,
+  } = useLogin();
+
+  const fields = [
+    {
+      name: "email",
+      type: "email",
+    },
+    {
+      name: "password",
+      type: "password",
+    },
+  ];
 
   return (
-    <AuthLayout heading={loginData.heading} subheading={loginData.subheading}>
+    <AuthLayout
+      heading={t("heading")}
+      subheading={t("subheading")}
+    >
       <Card>
-        <form className={styles.form} onSubmit={handleSubmit} noValidate>
-          <h1 className={styles.title}>Log in</h1>
+        <form
+          className={styles.form}
+          onSubmit={handleSubmit}
+          noValidate
+        >
+          <h1 className={styles.title}>
+            {t("title")}
+          </h1>
 
-          <FormMessage type="error" message={formError} />
+          <FormMessage
+            type="error"
+            message={formError}
+          />
 
-          {loginData.form.fields.map((field) => (
+          {fields.map((field) => (
             <Input
               key={field.name}
-              {...field}
+              name={field.name}
+              label={t(`labels.${field.name}`)}
+              type={field.type}
+              placeholder={t(`placeholders.${field.name}`)}
               value={form[field.name]}
               onChange={handleChange}
               error={fieldErrors[field.name]}
             />
           ))}
 
-          <Button type="submit" isLoading={isSubmitting} fullWidth>
-  {loginData.form.submitLabel}
-</Button>
+          <Button
+            type="submit"
+            isLoading={isSubmitting}
+            fullWidth
+          >
+            {t("submitLabel")}
+          </Button>
 
-<p className={styles.forgotPasswordText}>
-  <Link href={loginData.forgotPassword.linkHref} className={styles.footerLink}>
-    {loginData.forgotPassword.text}
-  </Link>
-</p>
+          <p className={styles.forgotPasswordText}>
+            <Link
+              href={t("forgotPassword.linkHref")}
+              className={styles.footerLink}
+            >
+              {t("forgotPassword.text")}
+            </Link>
+          </p>
 
           <p className={styles.footerText}>
-            {loginData.footer.text}{" "}
-            <Link href={loginData.footer.linkHref} className={styles.footerLink}>
-              {loginData.footer.linkLabel}
+            {t("footer.text")}{" "}
+            <Link
+              href={t("footer.linkHref")}
+              className={styles.footerLink}
+            >
+              {t("footer.linkLabel")}
             </Link>
           </p>
         </form>

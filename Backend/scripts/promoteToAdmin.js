@@ -21,11 +21,14 @@ async function main() {
     process.exit(1);
   }
 
-  const existingAdminCount = await prisma.user.count({ where: { role: "ADMIN" } });
-  if (existingAdminCount > 0) {
-    console.error("An ADMIN account already exists. Only one admin is allowed.");
-    process.exit(1);
-  }
+ const existingAdminCount = await prisma.user.count({
+  where: { role: "ADMIN" },
+});
+
+if (existingAdminCount >= 4) {
+  console.error("Maximum of 4 ADMIN accounts already exists.");
+  process.exit(1);
+}
 
   const updated = await prisma.user.update({
     where: { email },

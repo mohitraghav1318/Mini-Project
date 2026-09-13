@@ -1,0 +1,74 @@
+.page {
+  min-height: 100vh;
+  padding: 2.5rem 2rem;
+  background: var(--color-bg);
+}
+
+.header,
+.lessons {
+  display: grid;
+  gap: 1rem;
+  max-width: 42rem;
+}
+
+.header h1,
+.lessons h2,
+.lesson h3 {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.description,
+.lessonDetails span,
+.status {
+  color: var(--color-muted, #76716b);
+}
+
+.category {
+  color: var(--color-indigo);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.backLink {
+  color: var(--color-indigo);
+  font-weight: 600;
+}
+
+.lessons {
+  margin-top: 2.5rem;
+}
+
+.lesson {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: 6px;
+  background: var(--color-cotton, #fff);
+}
+
+.lessonDetails {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.lessonDetails span {
+  overflow-wrap: anywhere;
+  font-size: 0.85rem;
+}
+
+.status,
+.error {
+  margin: 2.5rem 2rem;
+}
+
+.error {
+  color: var(--color-alta, #c0392b);
+}

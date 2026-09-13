@@ -18,16 +18,26 @@
     "heading": "Courses",
     "loading": "Loading courses...",
     "empty": "No courses yet.",
+    "searchPlaceholder": "Search courses",
+    "allCategories": "All categories",
     "lesson": "lesson",
     "lessons": "lessons",
     "lessonHeading": "Lessons",
     "addLesson": "Add lesson",
     "hideLessonForm": "Hide lesson form",
     "edit": "Edit",
+    "manage": "Manage",
     "delete": "Delete",
     "courseDeleted": "Course deleted successfully.",
     "lessonDeleted": "Lesson deleted successfully.",
     "actionError": "Could not complete that action. Please try again."
+  },
+  "detail": {
+    "loading": "Loading course...",
+    "notFound": "Course not found.",
+    "backToCourses": "Back to courses",
+    "editCourse": "Edit course",
+    "noLessons": "No lessons yet."
   },
   "confirm": {
     "deleteCourse": "Delete this course and all of its lessons?",

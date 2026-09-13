@@ -17,6 +17,32 @@ export const listCourses = asyncHandler(async (req, res) => {
   });
 });
 
+export const getCourseById = asyncHandler(async (req, res) => {
+  const courseId = Number(req.params.courseId);
+
+  if (!Number.isInteger(courseId)) {
+    throw new ApiError(404, "Course not found.");
+  }
+
+  const course = await prisma.course.findUnique({
+    where: { id: courseId },
+    include: {
+      lessons: {
+        orderBy: { order: "asc" },
+      },
+    },
+  });
+
+  if (!course) {
+    throw new ApiError(404, "Course not found.");
+  }
+
+  return res.status(200).json({
+    success: true,
+    data: course,
+  });
+});
+
 export const createCourse = asyncHandler(async (req, res) => {
   const { title, description, category } = req.body;
 
