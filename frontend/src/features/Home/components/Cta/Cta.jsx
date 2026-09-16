@@ -1,0 +1,2 @@
+"use client";
+import {useTranslations} from "next-intl";import {ArrowRight} from "lucide-react";import {Link} from "@/i18n/navigation";import styles from "./Cta.module.scss";export default function Cta(){const t=useTranslations("home.cta");return <section className={styles.section}><h2>{t("title")}</h2><p>{t("description")}</p><Link href="/register">{t("button")} <ArrowRight size={18}/></Link></section>}
