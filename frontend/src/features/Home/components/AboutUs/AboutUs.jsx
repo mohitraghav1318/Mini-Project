@@ -1,0 +1,2 @@
+"use client";
+import {useTranslations} from "next-intl";import {Check} from "lucide-react";import styles from "./AboutUs.module.scss";export default function AboutUs(){const t=useTranslations("home.about");return <section className={styles.section}><div className={styles.image} aria-hidden="true"><span>🌾</span><div>हम साथ हैं</div></div><div className={styles.copy}><p>{t("eyebrow")}</p><h2>{t("title")}</h2><span>{t("description")}</span><ul>{["pointOne","pointTwo","pointThree"].map(point=><li key={point}><Check size={18}/>{t(point)}</li>)}</ul></div></section>}

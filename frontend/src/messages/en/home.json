@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "eyebrow": "Built with rural women, for rural women",
+    "title": "Your next chapter starts right where you are.",
+    "description": "Learn practical skills, meet women who understand your journey, and build a stronger future—one small step at a time.",
+    "primary": "Join for free",
+    "secondary": "Explore how it works",
+    "statOne": "Free to join",
+    "statTwo": "Learn at your pace"
+  },
+  "how": {
+    "eyebrow": "Simple by design",
+    "title": "How to join",
+    "description": "A welcoming community is just three easy steps away.",
+    "steps": [
+      {"number": "01", "title": "Create your profile", "description": "Tell us about your interests and what you would like to learn."},
+      {"number": "02", "title": "Choose your path", "description": "Explore free lessons, local opportunities, and helpful conversations."},
+      {"number": "03", "title": "Grow together", "description": "Learn, share your knowledge, and get support when you need it."}
+    ]
+  },
+  "why": {
+    "eyebrow": "Made for your everyday life",
+    "title": "A little support can change a lot.",
+    "description": "Everything here is designed to make learning and finding support feel possible, useful, and close to home.",
+    "items": [
+      {"title": "Learn useful skills", "description": "Practical, easy-to-follow courses for work, business, and everyday life."},
+      {"title": "Find your people", "description": "Connect with women nearby who can share their experience and encouragement."},
+      {"title": "Ask without hesitation", "description": "Get guidance from a kind community whenever you are unsure of the next step."}
+    ]
+  },
+  "about": {
+    "eyebrow": "Our promise",
+    "title": "A community where every woman belongs.",
+    "description": "Rural Women Helper is a safe, supportive space for women in villages to learn, connect, and create more choices for themselves and their families.",
+    "pointOne": "No fees to become a member",
+    "pointTwo": "Skills and support in simple language",
+    "pointThree": "A community that celebrates every step forward",
+    "link": "More about us"
+  },
+  "quote": {
+    "text": "When women learn together, their confidence reaches far beyond the classroom.",
+    "author": "— The Rural Women Helper community"
+  },
+  "cta": {
+    "title": "You do not have to do it alone.",
+    "description": "Join a community that is ready to learn, support, and grow with you.",
+    "button": "Create your free account"
+  },
+  "footer": "A community built by and for women in villages."
+}
