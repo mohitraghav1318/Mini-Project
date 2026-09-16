@@ -1,0 +1,108 @@
+﻿// ── CTA Band ───────────────────────────────────────────────────────────────
+.ctaBand {
+  background: linear-gradient(135deg, var(--color-saffron) 0%, var(--color-marigold) 100%);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3.5rem 4rem;
+  }
+}
+
+.ctaHeading {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ctaBtn {
+  display: inline-block;
+  background: #fff;
+  color: var(--color-saffron-dark);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 2.25rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// ── Footer ─────────────────────────────────────────────────────────────────
+.footer {
+  background: var(--color-indigo-deep);
+  padding: 3rem 1.5rem 1.5rem;
+
+  @media (min-width: 1024px) { padding: 3.5rem 4rem 1.5rem; }
+}
+
+.grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (min-width: 640px) { grid-template-columns: 2fr 1fr 1fr; }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.logo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.55;
+  max-width: 30ch;
+}
+
+.colHeading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-marigold);
+  margin-bottom: 0.25rem;
+}
+
+.link {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover { color: #fff; }
+}
+
+.copy {
+  max-width: 1100px;
+  margin: 1.25rem auto 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}

@@ -1,0 +1,185 @@
+﻿// ── Hero Section ──────────────────────────────────────────────────────────
+.hero {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background 0.6s ease;
+
+  @media (min-width: 768px) { min-height: 580px; }
+}
+
+.inner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 4rem 1.5rem 6rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (min-width: 1024px) { padding: 4rem 4rem 6rem; }
+}
+
+// ── Text block ─────────────────────────────────────────────────────────────
+.text { flex: 1; min-width: 0; }
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  opacity: 0.85;
+}
+
+.heading {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.accent { opacity: 0.9; }
+
+.sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.6;
+  max-width: 46ch;
+  margin-bottom: 1.75rem;
+  opacity: 0.88;
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.ctaLight {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-forest);
+}
+
+.ctaDark {
+  background: var(--color-forest);
+  color: #fff;
+}
+
+// ── Light / Dark text modes ────────────────────────────────────────────────
+.light { color: #fff; }
+.dark  { color: var(--color-ink); }
+
+// ── Graphic circle ─────────────────────────────────────────────────────────
+.graphic {
+  flex-shrink: 0;
+  width: clamp(160px, 28vw, 280px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+
+  @media (min-width: 640px) { display: flex; }
+}
+
+.emoji {
+  font-size: clamp(4rem, 10vw, 7rem);
+  line-height: 1;
+}
+
+// ── Arrows ─────────────────────────────────────────────────────────────────
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: background 0.15s ease;
+  z-index: 2;
+
+  &:hover { background: rgba(255, 255, 255, 0.35); }
+}
+
+.prev { left: 1rem; }
+.next { right: 1rem; }
+
+// ── Dots ───────────────────────────────────────────────────────────────────
+.dots {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dotActive {
+  background: #fff;
+  transform: scale(1.4);
+}
+
+// ── Feature chips ──────────────────────────────────────────────────────────
+.chips {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 2;
+}
+
+.chip {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}

@@ -30,16 +30,6 @@ export default function Navbar() {
           <Link href="/courses" className={styles.navLink}>
             📚 {t('courses')}
           </Link>
-          {user && (
-            <Link href="/community" className={styles.navLink}>
-              👥 {t('community')}
-            </Link>
-          )}
-          {user && (
-            <Link href="/dashboard" className={styles.navLink}>
-              {t('dashboard')}
-            </Link>
-          )}
         </div>
 
         {/* Right-side actions */}
