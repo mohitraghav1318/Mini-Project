@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import { PrismaClient } from "../src/generated/prisma/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 
-const ADMIN_EMAIL = "mohitraghav911@gmail.com";
+const ADMIN_EMAIL = process.env.NEW_ADMIN_EMAIL;
 const SALT_ROUNDS = 12;
 const newPassword = process.env.NEW_ADMIN_PASSWORD;
 

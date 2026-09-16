@@ -5,6 +5,22 @@
   margin-top: 2.5rem;
 }
 
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(12rem, 1fr);
+  gap: 1rem;
+  align-items: end;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: 6px;
+  color: var(--color-text);
+  background: var(--color-cotton, #fff);
+}
+
 .card {
   padding: 1.25rem;
   border: 1px solid var(--color-border, #ddd);
@@ -31,11 +47,6 @@
   font-weight: 600;
 }
 
-.description {
-  margin: 0.75rem 0;
-  color: var(--color-text);
-}
-
 .lessonCount,
 .status,
 .error {
@@ -47,39 +58,6 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.75rem;
-}
-
-.lessons {
-  display: grid;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--color-border, #ddd);
-}
-
-.lessons h3 {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 1rem;
-}
-
-.lesson {
-  display: grid;
-  gap: 0.5rem;
-  padding: 0.75rem;
-  border: 1px solid var(--color-border, #ddd);
-  border-radius: 6px;
-}
-
-.lessonDetails {
-  display: grid;
-  gap: 0.25rem;
-}
-
-.lessonDetails span {
-  overflow-wrap: anywhere;
-  color: var(--color-muted, #76716b);
-  font-size: 0.85rem;
 }
 
 .lessonCount,
@@ -94,4 +72,10 @@
 .error {
   margin-top: 2.5rem;
   color: var(--color-alta, #c0392b);
+}
+
+@media (max-width: 36rem) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
 }

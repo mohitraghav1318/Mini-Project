@@ -1,0 +1,23 @@
+{
+  "heading": "वापसी पर स्वागत है",
+  "subheading": "अपनी यात्रा जारी रखने के लिए लॉग इन करें",
+  "title": "लॉग इन करें",
+  "labels": {
+    "email": "ईमेल",
+    "password": "पासवर्ड"
+  },
+  "placeholders": {
+    "email": "अपना ईमेल दर्ज करें",
+    "password": "अपना पासवर्ड दर्ज करें"
+  },
+  "submitLabel": "लॉग इन करें",
+  "forgotPassword": {
+    "linkHref": "/forgot-password",
+    "text": "पासवर्ड भूल गए?"
+  },
+  "footer": {
+    "text": "खाता नहीं है?",
+    "linkHref": "/register",
+    "linkLabel": "साइन अप करें"
+  }
+}
