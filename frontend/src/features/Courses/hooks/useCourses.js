@@ -52,6 +52,13 @@ export function useCourses() {
     });
 
     courses = [...matchingCourses, ...remainingCourses];
+  } else {
+    // No occupation: sort by enrollment count descending
+    courses = [...fetchedCourses].sort((a, b) => {
+      const aCount = a._count?.enrollments ?? 0;
+      const bCount = b._count?.enrollments ?? 0;
+      return bCount - aCount;
+    });
   }
 
   return { courses, isLoading, error };

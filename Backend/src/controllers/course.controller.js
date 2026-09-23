@@ -8,7 +8,10 @@ import { isUserEnrolled } from "../services/enrollment.service.js";
 export const listCourses = asyncHandler(async (req, res) => {
   const courses = await prisma.course.findMany({
     orderBy: { createdAt: "desc" },
-    include: { lessons: true },
+    include: {
+      lessons: true,
+      _count: { select: { enrollments: true } },
+    },
   });
 
   return res.status(200).json({
