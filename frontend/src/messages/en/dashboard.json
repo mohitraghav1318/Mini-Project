@@ -1,35 +1,62 @@
 {
-  "welcome": "Welcome, {name}",
+  "welcome": "Welcome back, {name} 👋",
+  "subtitle": "Access your SHG information, track your courses, and connect with your community",
+  "activeMember": "Active SHG Member",
   "profile": {
     "title": "Your Profile",
+    "subtitle": "Keep your Self-Help Group details updated to get personalized recommendations",
     "shgName": "SHG Name",
     "district": "District",
     "state": "State",
     "occupation": "Occupation",
-    "editButton": "Edit Profile"
+    "editButton": "Edit Profile",
+    "notSet": "Not specified"
+  },
+  "stats": {
+    "title": "Overview",
+    "enrolledCourses": "Enrolled Courses",
+    "shgGroup": "SHG Group",
+    "location": "Location",
+    "occupation": "Occupation"
+  },
+  "quickActions": {
+    "title": "Quick Shortcuts",
+    "exploreCourses": "Explore Courses",
+    "exploreCoursesDesc": "Browse new skill-building programs for women entrepreneurs",
+    "community": "Community Hub",
+    "communityDesc": "Share experiences and ask questions to fellow members",
+    "updateProfile": "Update Profile",
+    "updateProfileDesc": "Modify your group, location, or occupation details"
   },
   "courses": {
-    "title": "Courses",
-    "eyebrow": "Empowerment & Skills",
-    "loading": "Loading your enrollments...",
-    "error": "We couldn't load your enrollments. Please try again.",
-    "enrolledCount": "Enrolled in {count, plural, =1 {# course} other {# courses}}",
-    "empty": "You haven't enrolled in a course yet. Explore courses to get started.",
-    "explore": "Explore Courses"
+    "title": "My Enrolled Courses",
+    "eyebrow": "Empowerment & Learning",
+    "loading": "Loading your courses...",
+    "error": "Unable to load your courses right now. Please try again.",
+    "enrolledCount": "{count, plural, =1 {# course active} other {# courses active}}",
+    "empty": "You haven't enrolled in any courses yet. Explore our free courses to start learning new skills!",
+    "explore": "Explore Courses",
+    "openCourse": "Continue Learning"
   },
   "community": {
     "title": "Community",
     "comingSoon": "Community features are coming soon!",
     "explore": "Explore Community"
   },
-  "backToDashboard": "Back to Dashboard",
+  "errorState": {
+    "title": "We couldn't load your dashboard",
+    "description": "Please check your network connection and try again.",
+    "retry": "Try Again"
+  },
   "editProfile": {
+    "modalTitle": "Edit Profile Details",
+    "modalSubtitle": "Update your Self-Help Group, location, and occupation info",
     "shgNamePlaceholder": "Enter your SHG name",
     "districtPlaceholder": "Enter your district",
-    "statePlaceholder": "Enter your state",
+    "statePlaceholder": "Select your state",
     "occupationPlaceholder": "Select your occupation",
     "cancel": "Cancel",
-    "save": "Save changes",
+    "save": "Save Changes",
     "saving": "Saving..."
   }
 }

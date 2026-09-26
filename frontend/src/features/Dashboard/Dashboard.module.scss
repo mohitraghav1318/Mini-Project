@@ -1,3 +1,5 @@
+@use "@/styles/variables" as *;
+
 .page {
   min-height: 100vh;
   background: var(--color-bg);
@@ -8,397 +10,502 @@
 .content {
   flex: 1;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 2.5rem 2rem 4rem;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem 4rem;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1140px;
   margin: 0 auto;
 }
 
-.skeletonGrid {
-  display: grid;
-  gap: 1.5rem;
+.dashboardLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
   width: 100%;
 }
 
-.skeletonCard,
-.errorState {
-  width: 100%;
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-sm);
-}
-
-.skeletonCard {
+/* Hero Card Header */
+.heroCard {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  padding: 2.25rem 2.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(226, 163, 61, 0.3);
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    rgba(253, 248, 238, 0.95) 50%,
+    rgba(244, 236, 220, 0.8) 100%
+  );
+  box-shadow: 0 10px 30px rgba(43, 38, 32, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.skeletonCard::after {
+.heroBackgroundPattern {
   position: absolute;
-  inset: 0;
-  content: "";
-  transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
-  animation: skeletonShimmer 1.4s ease-in-out infinite;
+  top: -40px;
+  right: -40px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(226, 163, 61, 0.15) 0%, rgba(36, 68, 107, 0.03) 70%, transparent 100%);
+  pointer-events: none;
 }
 
-.skeletonProfile {
-  padding: 3rem 2.5rem 2.25rem;
-  border-top: 4px solid #e2a33d;
-}
-
-.skeletonHeader {
+.heroMain {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding-bottom: 2.1rem;
-  border-bottom: 1px solid #eeeeec;
+  gap: 1.75rem;
 }
 
-.skeletonAvatar,
-.skeletonLineSmall,
-.skeletonLineTitle,
-.skeletonLineText,
-.skeletonButton,
-.skeletonDetails span,
-.skeletonCourseTitle,
-.skeletonCourseText {
-  display: block;
-  border-radius: 999px;
-  background: #eee9df;
-}
-
-.skeletonAvatar {
-  width: 3.6rem;
-  height: 3.6rem;
+.avatarWrapper {
+  position: relative;
   flex: 0 0 auto;
-  border-radius: 0.8rem;
-}
-
-.skeletonIntro {
-  display: grid;
-  flex: 1;
-  gap: 0.45rem;
-}
-
-.skeletonLineSmall { width: 5rem; height: 0.7rem; }
-.skeletonLineTitle { width: min(18rem, 70%); height: 1.35rem; }
-.skeletonLineText { width: min(25rem, 90%); height: 0.8rem; }
-.skeletonButton { width: 7rem; height: 2.5rem; }
-
-.skeletonDetails {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  padding-top: 1.9rem;
-}
-
-.skeletonDetails span { height: 4.2rem; border-radius: 0.75rem; }
-
-.skeletonCourse {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 11rem;
-  padding: 2.5rem;
-}
-
-.skeletonCourseTitle { width: 6rem; height: 1.2rem; }
-.skeletonCourseText { width: min(18rem, 35%); height: 0.85rem; }
-
-.errorState {
-  display: grid;
-  justify-items: center;
-  gap: 0.75rem;
-  padding: 3rem 1.5rem;
-  text-align: center;
-}
-
-.errorState h2 { font-size: 1.35rem; }
-.errorState p { color: #76716b; font-size: 0.9rem; }
-
-@keyframes skeletonShimmer {
-  100% { transform: translateX(100%); }
-}
-
-.profileCard {
-  max-width: none;
-  padding: 3rem 2.5rem 2.25rem;
-  border-top: 4px solid var(--color-indigo);
-  border-image: linear-gradient(90deg, #e19a1d 0 40%, var(--color-indigo) 60%) 1;
-}
-
-.profileHeader {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 0 0 2.1rem;
-  border-bottom: 1px solid #eeeeec;
 }
 
 .avatar {
   display: grid;
   place-items: center;
-  width: 3.6rem;
-  height: 3.6rem;
-  flex: 0 0 auto;
-  border: 1px solid #f2dfbd;
-  border-radius: 0.8rem;
-  background: #fff8ed;
-  color: #df9416;
-  font-size: 1.2rem;
-  font-weight: 700;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 1.1rem;
+  background: linear-gradient(135deg, var(--color-marigold), #d18a22);
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 20px rgba(226, 163, 61, 0.35);
 }
 
-.profileIntro {
+.onlineBadge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.heroInfo {
+  flex: 1;
   min-width: 0;
 }
 
-.memberStatus,
-.courseEyebrow {
-  display: inline-block;
-  padding: 0.14rem 0.55rem;
-  border-radius: 999px;
-  background: #f7f7f5;
-  color: #66635e;
-  font-size: 0.7rem;
-  line-height: 1.2;
-}
-
-.memberStatus::before {
-  content: "";
-  display: inline-block;
-  width: 0.4rem;
-  height: 0.4rem;
-  margin-right: 0.35rem;
-  border-radius: 50%;
-  background: #0fb679;
-}
-
-.profileTitle {
-  margin-top: 0.28rem;
-  font-size: 1.85rem;
-  color: var(--color-text);
-  overflow-wrap: anywhere;
-}
-
-.profileSubtitle {
-  color: #76716b;
-  font-size: 0.82rem;
-}
-
-.profileDetails {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  padding-top: 1.9rem;
-}
-
-.cardsGrid {
-  display: grid;
-  gap: 1.5rem;
-  width: 100%;
-  margin-bottom: 2rem;
-}
-
-.cardsGrid > :first-child,
-.cardsGrid > :nth-child(2) {
-  width: 100%;
-  max-width: none;
-}
-
-.detailTile {
-  display: flex;
-  flex-direction: column;
+.statusPill {
+  display: inline-flex;
+  align-items: center;
   gap: 0.45rem;
-  padding: 1rem 1.1rem;
-  border: 1px solid #f0efed;
-  border-radius: 0.75rem;
-  background: #fdfdfc;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: rgba(92, 122, 82, 0.12);
+  color: var(--color-leaf);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
-.detailTile span {
-  color: #77736e;
-  font-size: 0.68rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.statusDot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--color-leaf);
+  animation: pulseDot 2s infinite;
 }
 
-.detailTile strong {
-  color: #292725;
-  font-size: 0.9rem;
+.heroGreeting {
+  margin: 0.4rem 0 0.25rem;
+  color: var(--color-indigo-deep);
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
-.courseCard {
-  display: flex;
+.heroSubtitle {
+  margin: 0;
+  color: #66635e;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.editProfileBtn {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  max-width: none;
-  min-height: 11rem;
-  padding: 2.5rem 2.5rem;
-}
-
-.cardTitle {
-  margin-top: 0.55rem;
-  font-size: 1.25rem;
-  color: var(--color-text);
-}
-
-.cardText {
-  max-width: 29rem;
-  color: var(--color-text-light);
-  margin: 0.5rem 0 0;
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
-
-.cardError {
-  max-width: 29rem;
-  margin: 0.5rem 0 0;
-  color: var(--color-error);
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
-
-.courseEyebrow {
-  color: #d78b0d;
-  background: #fff8e9;
-}
-
-.buttonLink {
-  display: inline-block;
-  padding: 0.7rem 1.5rem;
-  background-color: #df9416;
-  color: white;
-  text-decoration: none;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  transition: background-color 0.3s ease;
-}
-
-.buttonLink:hover {
-  background-color: #c67e0c;
-  text-decoration: none;
-}
-
-.courseList {
-  display: grid;
-  gap: 0.55rem;
-  min-width: min(100%, 22rem);
-}
-
-.courseItem {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  padding: 0.65rem 0.8rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  gap: 0.5rem;
+  padding: 0.7rem 1.35rem;
+  border: 1.5px solid rgba(36, 68, 107, 0.18);
+  border-radius: var(--radius-pill);
   background: var(--color-surface);
   color: var(--color-indigo);
-  font: inherit;
-  text-align: left;
+  font-size: 0.88rem;
+  font-weight: 650;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  &:hover {
+    background: var(--color-indigo);
+    border-color: var(--color-indigo);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(36, 68, 107, 0.22);
+  }
+}
+
+/* Stats Overview Section */
+.statsSection {
+  width: 100%;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.35rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(43, 38, 32, 0.08);
+    border-color: rgba(226, 163, 61, 0.35);
+  }
+}
+
+.statIcon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 auto;
+  border-radius: 0.85rem;
+}
+
+.statIconCourse {
+  background: rgba(226, 163, 61, 0.14);
+  color: #c98011;
+}
+
+.statIconShg {
+  background: rgba(36, 68, 107, 0.12);
+  color: var(--color-indigo);
+}
+
+.statIconLocation {
+  background: rgba(92, 122, 82, 0.14);
+  color: var(--color-leaf);
+}
+
+.statIconOccupation {
+  background: rgba(161, 61, 61, 0.12);
+  color: var(--color-alta);
+}
+
+.statMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.statLabel {
+  color: #76716b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.statValue {
+  color: var(--color-indigo-deep);
+  font-size: 1.05rem;
+  font-weight: 750;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Quick Action Shortcuts */
+.shortcutsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 750;
+  color: var(--color-indigo-deep);
+}
+
+.headingIcon {
+  color: var(--color-marigold);
+}
+
+.shortcutsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.shortcutCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.35rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
   text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-indigo);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(36, 68, 107, 0.12);
+  }
 }
 
-.courseItem:hover,
-.courseItem:focus-visible {
-  border-color: var(--color-indigo);
-  outline: none;
+.shortcutCardBtn {
+  width: 100%;
+  font-family: inherit;
+  text-align: left;
 }
 
-.courseArrow {
+.shortcutIcon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
   flex: 0 0 auto;
-  font-size: 1.2rem;
+  border-radius: 0.75rem;
 }
 
-/* Edit Button */
-.editButton {
+.shortcutIconCourse {
+  background: rgba(226, 163, 61, 0.14);
+  color: #c98011;
+}
+
+.shortcutIconCommunity {
+  background: rgba(36, 68, 107, 0.12);
+  color: var(--color-indigo);
+}
+
+.shortcutIconProfile {
+  background: rgba(92, 122, 82, 0.14);
+  color: var(--color-leaf);
+}
+
+.shortcutContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.shortcutTitle {
+  margin: 0 0 0.2rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-indigo-deep);
+}
+
+.shortcutDesc {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #76716b;
+  line-height: 1.35;
+}
+
+.shortcutArrow {
   flex: 0 0 auto;
-  margin-left: auto;
-  padding: 0.7rem 1.35rem;
-  background: #df9416;
+  color: var(--color-indigo);
+  transition: transform 0.2s ease;
+
+  .shortcutCard:hover & {
+    transform: translateX(4px);
+    color: var(--color-marigold);
+  }
+}
+
+.coursesContainer {
+  width: 100%;
+}
+
+/* Skeleton Loading State */
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.skeletonHero {
+  width: 100%;
+  height: 10rem;
+  border-radius: var(--radius-md);
+  background: #eee9df;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.skeletonCard {
+  height: 5.5rem;
+  border-radius: var(--radius-md);
+  background: #eee9df;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Error Card State */
+.errorCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 500px;
+  padding: 3rem 2rem;
+  margin: 2rem auto;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid rgba(161, 61, 61, 0.2);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.errorIconWrapper {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(161, 61, 61, 0.1);
+  color: var(--color-alta);
+}
+
+.errorTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-indigo-deep);
+}
+
+.errorDesc {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #66635e;
+}
+
+.retryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-indigo);
   color: white;
-  border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: 0.88rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: var(--color-indigo-deep);
+    transform: translateY(-1px);
+  }
 }
 
-@media (max-width: 800px) {
-  .content {
-    padding: 1rem;
-  }
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
 
-  .profileCard {
-    padding: 1.35rem;
-  }
+@keyframes shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
 
-  .skeletonProfile {
-    padding: 1.35rem;
-  }
-
-  .profileHeader {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .editButton {
-    margin-left: 0;
-  }
-
-  .profileDetails {
+/* Responsive Breakpoints */
+@media (max-width: 960px) {
+  .statsGrid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .skeletonDetails {
-    grid-template-columns: repeat(2, 1fr);
+  .shortcutsGrid {
+    grid-template-columns: 1fr;
   }
+}
 
-  .courseCard {
-    align-items: flex-start;
+@media (max-width: 680px) {
+  .heroMain {
     flex-direction: column;
-    gap: 1rem;
-    padding: 1.35rem;
-  }
-
-  .skeletonHeader,
-  .skeletonCourse {
     align-items: flex-start;
-    flex-direction: column;
+    gap: 1.25rem;
   }
-
-  .skeletonCourse {
-    gap: 1rem;
-    padding: 1.35rem;
-  }
-
-  .skeletonButton {
+  .editProfileBtn {
     width: 100%;
+    justify-content: center;
   }
-
-  .buttonLink {
-    align-self: stretch;
-    text-align: center;
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  .skeletonGrid {
+    grid-template-columns: 1fr;
+  }
+  .content {
+    padding: 1.25rem 1rem 3rem;
+  }
+  .heroCard {
+    padding: 1.5rem;
+  }
+  .heroGreeting {
+    font-size: 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
-  .content {
-    padding: 0.75rem 0.65rem 2rem;
-  }
-
-  .profileDetails {
-    grid-template-columns: 1fr;
-  }
-
-  .skeletonDetails {
-    grid-template-columns: 1fr;
-  }
-
-  .profileTitle {
-    font-size: 1.35rem;
+@media (prefers-reduced-motion: reduce) {
+  .heroCard,
+  .statCard,
+  .shortcutCard,
+  .shortcutArrow,
+  .editProfileBtn,
+  .retryBtn,
+  .skeletonHero,
+  .skeletonCard,
+  .statusDot {
+    transition: none;
+    animation: none;
   }
 }
