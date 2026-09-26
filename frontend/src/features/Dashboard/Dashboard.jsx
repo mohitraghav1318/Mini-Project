@@ -159,50 +159,7 @@ export default function Dashboard() {
                 </div>
               </section>
 
-              {/* Quick Action Shortcuts */}
-              <section className={styles.shortcutsSection}>
-                <h2 className={styles.sectionHeading}>
-                  <Sparkles size={18} className={styles.headingIcon} aria-hidden="true" />
-                  {t("quickActions.title")}
-                </h2>
-                <div className={styles.shortcutsGrid}>
-                  <Link href="/courses" className={styles.shortcutCard}>
-                    <div className={`${styles.shortcutIcon} ${styles.shortcutIconCourse}`}>
-                      <BookOpen size={20} />
-                    </div>
-                    <div className={styles.shortcutContent}>
-                      <h3 className={styles.shortcutTitle}>{t("quickActions.exploreCourses")}</h3>
-                      <p className={styles.shortcutDesc}>{t("quickActions.exploreCoursesDesc")}</p>
-                    </div>
-                    <ArrowRight size={18} className={styles.shortcutArrow} />
-                  </Link>
-
-                  <Link href="/community" className={styles.shortcutCard}>
-                    <div className={`${styles.shortcutIcon} ${styles.shortcutIconCommunity}`}>
-                      <Users size={20} />
-                    </div>
-                    <div className={styles.shortcutContent}>
-                      <h3 className={styles.shortcutTitle}>{t("quickActions.community")}</h3>
-                      <p className={styles.shortcutDesc}>{t("quickActions.communityDesc")}</p>
-                    </div>
-                    <ArrowRight size={18} className={styles.shortcutArrow} />
-                  </Link>
-
-                  <button
-                    onClick={() => setIsEditing(true)}
-                    className={`${styles.shortcutCard} ${styles.shortcutCardBtn}`}
-                  >
-                    <div className={`${styles.shortcutIcon} ${styles.shortcutIconProfile}`}>
-                      <UserCheck size={20} />
-                    </div>
-                    <div className={styles.shortcutContent}>
-                      <h3 className={styles.shortcutTitle}>{t("quickActions.updateProfile")}</h3>
-                      <p className={styles.shortcutDesc}>{t("quickActions.updateProfileDesc")}</p>
-                    </div>
-                    <ArrowRight size={18} className={styles.shortcutArrow} />
-                  </button>
-                </div>
-              </section>
+              
 
               {/* Enrolled Courses */}
               <div className={styles.coursesContainer}>
