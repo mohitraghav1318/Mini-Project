@@ -63,6 +63,22 @@
   }
 }
 
+.coursesLink {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  color: var(--color-indigo);
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
 .userSection {
   display: flex;
   align-items: center;

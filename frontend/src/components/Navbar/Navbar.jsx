@@ -20,6 +20,10 @@ return (
       <div className={styles.actions}>
         <LanguageSwitcher />
 
+        <Link href="/courses" className={styles.coursesLink}>
+          {t('courses')}
+        </Link>
+
         {isLoading ? null : user ? (
           <div className={styles.userSection}>
             <Link href="/dashboard" className={styles.userName}>
