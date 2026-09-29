@@ -7,7 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 
 const initialForm = { email: "", password: "" };
 
-export function useLogin() {
+export function useLogin({ redirectTo } = {}) {
   const router = useRouter();
   const { refreshUser } = useAuth();
   const [form, setForm] = useState(initialForm);
@@ -42,7 +42,7 @@ export function useLogin() {
     try {
       await loginUser(form);
       await refreshUser();
-      router.push("/dashboard");
+      router.push(redirectTo || "/dashboard");
     } catch (err) {
       setFormError(err.message);
     } finally {

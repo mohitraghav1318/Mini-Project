@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Link, useRouter } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import {
   ArrowLeft,
   BookOpen,
@@ -27,6 +27,7 @@ export default function CourseDetail({ courseId }) {
   const tCommunity = useTranslations("community");
   const tOccupations = useTranslations("occupations");
   const router = useRouter();
+  const pathname = usePathname();
   const { course, isLoading, error } = useCourseDetail(courseId);
   const { user, isLoading: isAuthLoading } = useAuth();
   const {
@@ -144,7 +145,13 @@ export default function CourseDetail({ courseId }) {
                     isEnrolled ? styles.actionBtnEnrolled : styles.actionBtnEnroll
                   }`}
                   disabled={isEnrollmentLoading || isMutating}
-                  onClick={toggleEnrollment}
+                  onClick={() => {
+                    if (!user) {
+                      router.push(`/register?redirect=${encodeURIComponent(pathname)}`);
+                      return;
+                    }
+                    toggleEnrollment();
+                  }}
                 >
                   {isMutating ? (
                     <span>Processing...</span>

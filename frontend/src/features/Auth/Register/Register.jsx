@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import AuthLayout from "@/components/AuthLayout/AuthLayout";
@@ -16,6 +17,8 @@ export default function Register() {
   const t = useTranslations("register");
   const tStates = useTranslations("states");
   const tOccupations = useTranslations("occupations");
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || undefined;
 
   const {
     form,
@@ -25,7 +28,7 @@ export default function Register() {
     handleChange,
     handleValueChange,
     handleSubmit,
-  } = useRegister();
+  } = useRegister({ redirectTo });
 
   const stateOptions = STATE_KEYS.map((key) => ({
     value: key,

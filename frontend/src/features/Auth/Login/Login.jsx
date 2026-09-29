@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 import AuthLayout from "@/components/AuthLayout/AuthLayout";
@@ -15,6 +16,8 @@ import styles from "./Login.module.scss";
 
 export default function Login() {
   const t = useTranslations("login");
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || undefined;
 
   const {
     form,
@@ -23,7 +26,7 @@ export default function Login() {
     isSubmitting,
     handleChange,
     handleSubmit,
-  } = useLogin();
+  } = useLogin({ redirectTo });
 
   const fields = [
     {
