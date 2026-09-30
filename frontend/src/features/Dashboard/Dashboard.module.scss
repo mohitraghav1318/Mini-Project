@@ -134,6 +134,14 @@
   line-height: 1.45;
 }
 
+.heroActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
 .editProfileBtn {
   display: inline-flex;
   align-items: center;
@@ -156,6 +164,29 @@
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(36, 68, 107, 0.22);
+  }
+}
+
+.manageCoursesBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.35rem;
+  border: 1.5px solid rgba(226, 163, 61, 0.45);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, #e2a33d, #c98011);
+  color: white;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(201, 128, 17, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(201, 128, 17, 0.4);
+    filter: brightness(1.06);
   }
 }
 
@@ -240,6 +271,208 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* ── Admin Section ── */
+.adminSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(226, 163, 61, 0.25);
+  background: linear-gradient(
+    135deg,
+    rgba(253, 248, 238, 0.6) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  box-shadow: 0 4px 20px rgba(43, 38, 32, 0.05);
+}
+
+.adminSectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.adminSectionIcon {
+  color: var(--color-marigold, #e2a33d);
+}
+
+.adminSectionTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 750;
+  color: var(--color-indigo-deep);
+}
+
+/* Admin Stat Cards */
+.adminStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.adminStatCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: 0 2px 8px rgba(43, 38, 32, 0.04);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(43, 38, 32, 0.09);
+    border-color: rgba(226, 163, 61, 0.3);
+  }
+}
+
+.adminStatSkeleton {
+  height: 5.5rem;
+  background: #eee9df;
+  animation: shimmer 1.5s infinite;
+
+  &:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--color-border);
+  }
+}
+
+.adminStatsError {
+  font-size: 0.88rem;
+  color: var(--color-alta, #a13d3d);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(161, 61, 61, 0.07);
+}
+
+.adminStatIcon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 auto;
+  border-radius: 0.85rem;
+}
+
+.adminStatIconCourse {
+  background: rgba(226, 163, 61, 0.14);
+  color: #c98011;
+}
+
+.adminStatIconEnroll {
+  background: rgba(92, 122, 82, 0.14);
+  color: var(--color-leaf, #5c7a52);
+}
+
+.adminStatIconUsers {
+  background: rgba(36, 68, 107, 0.12);
+  color: var(--color-indigo, #24446b);
+}
+
+.adminStatMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.adminStatLabel {
+  color: #76716b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.adminStatValue {
+  color: var(--color-indigo-deep);
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.adminStatSub {
+  color: #9e9992;
+  font-size: 0.74rem;
+}
+
+/* Breakdown Card */
+.breakdownCard {
+  padding: 1.35rem 1.5rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: 0 2px 8px rgba(43, 38, 32, 0.04);
+}
+
+.breakdownTitle {
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-indigo-deep);
+}
+
+.breakdownList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.breakdownItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.breakdownMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.breakdownCourseName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-indigo-deep);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 75%;
+}
+
+.breakdownCount {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #76716b;
+  white-space: nowrap;
+}
+
+.progressBarTrack {
+  width: 100%;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: #eee9df;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e2a33d, #c98011);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 0.4rem;
 }
 
 /* Quick Action Shortcuts */
@@ -466,6 +699,9 @@
   .shortcutsGrid {
     grid-template-columns: 1fr;
   }
+  .adminStatsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 680px) {
@@ -474,11 +710,19 @@
     align-items: flex-start;
     gap: 1.25rem;
   }
-  .editProfileBtn {
+  .heroActions {
+    align-items: stretch;
+    width: 100%;
+  }
+  .editProfileBtn,
+  .manageCoursesBtn {
     width: 100%;
     justify-content: center;
   }
   .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  .adminStatsGrid {
     grid-template-columns: 1fr;
   }
   .skeletonGrid {
@@ -492,6 +736,9 @@
   }
   .heroGreeting {
     font-size: 1.5rem;
+  }
+  .adminSection {
+    padding: 1.25rem 1rem;
   }
 }
 

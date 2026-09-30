@@ -348,6 +348,41 @@ export const unenrollFromCourse = asyncHandler(async (req, res) => {
   });
 });
 
+export const getAdminStats = asyncHandler(async (req, res) => {
+  const [totalCourses, totalEnrollments, courses] = await Promise.all([
+    prisma.course.count(),
+    prisma.enrollment.count(),
+    prisma.course.findMany({
+      select: {
+        id: true,
+        title: true,
+        category: true,
+        _count: { select: { enrollments: true } },
+      },
+      orderBy: { createdAt: "desc" },
+    }),
+  ]);
+
+  const totalUniqueEnrolledUsers = await prisma.enrollment
+    .groupBy({ by: ["userId"] })
+    .then((groups) => groups.length);
+
+  return res.status(200).json({
+    success: true,
+    data: {
+      totalCourses,
+      totalEnrollments,
+      totalUniqueEnrolledUsers,
+      courses: courses.map((c) => ({
+        id: c.id,
+        title: c.title,
+        category: c.category,
+        enrollmentCount: c._count.enrollments,
+      })),
+    },
+  });
+});
+
 export const getEnrollmentStatus = asyncHandler(async (req, res) => {
   const courseId = Number(req.params.courseId);
 

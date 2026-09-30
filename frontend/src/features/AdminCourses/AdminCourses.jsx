@@ -28,9 +28,7 @@ export default function AdminCourses() {
   return (
     <main className={styles.page}>
       <h1>{t("title")}</h1>
-      <CourseForm
-        onSuccess={handleCourseCreated}
-      />
+      <CourseForm onSuccess={handleCourseCreated} />
       <CourseList />
     </main>
   );
