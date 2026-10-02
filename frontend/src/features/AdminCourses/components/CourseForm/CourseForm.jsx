@@ -28,56 +28,73 @@ export default function CourseForm({ initialCourse, onSuccess, onCancel }) {
   }));
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit} noValidate>
-      <Input
-        name="title"
-        label={t("form.titleLabel")}
-        type="text"
-        placeholder={t("form.titlePlaceholder")}
-        required
-        value={form.title}
-        onChange={handleChange}
-      />
-
-      <div className={styles.fieldGroup}>
-        <label className={styles.label} htmlFor="description">
-          {t("form.descriptionLabel")}
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          className={styles.textarea}
-          placeholder={t("form.descriptionPlaceholder")}
-          required
-          value={form.description}
-          onChange={handleChange}
-        />
+    <section className={styles.cardPanel}>
+      <div className={styles.cardHeader}>
+        <h2>{t(initialCourse ? "form.editHeading" : "form.heading")}</h2>
       </div>
 
-      <SearchableSelect
-        name="category"
-        label={t("form.categoryLabel")}
-        placeholder={t("form.categoryPlaceholder")}
-        required
-        value={form.category}
-        onChange={handleCategoryChange}
-        options={occupationOptions}
-      />
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        <div className={styles.formGrid}>
+          <div className={styles.fieldCol}>
+            <Input
+              name="title"
+              label={t("form.titleLabel")}
+              type="text"
+              placeholder={t("form.titlePlaceholder")}
+              required
+              value={form.title}
+              onChange={handleChange}
+            />
+          </div>
 
-      <FormMessage type="error" message={error} />
-      <FormMessage
-        type="success"
-        message={success ? t(initialCourse ? "form.updateSuccess" : "form.success") : null}
-      />
+          <div className={styles.fieldCol}>
+            <SearchableSelect
+              name="category"
+              label={t("form.categoryLabel")}
+              placeholder={t("form.categoryPlaceholder")}
+              required
+              value={form.category}
+              onChange={handleCategoryChange}
+              options={occupationOptions}
+            />
+          </div>
 
-      <Button type="submit" isLoading={isSubmitting} fullWidth>
-        {t(initialCourse ? "form.updateSubmitLabel" : "form.submitLabel")}
-      </Button>
-      {initialCourse && (
-        <Button type="button" variant="secondary" onClick={onCancel} fullWidth>
-          {t("form.cancelLabel")}
-        </Button>
-      )}
-    </form>
+          <div className={`${styles.fieldCol} ${styles.fullWidth}`}>
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="description">
+                {t("form.descriptionLabel")}
+                <span className={styles.requiredMark} aria-hidden="true"> *</span>
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                className={styles.textarea}
+                placeholder={t("form.descriptionPlaceholder")}
+                required
+                value={form.description}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+
+        <FormMessage type="error" message={error} />
+        <FormMessage
+          type="success"
+          message={success ? t(initialCourse ? "form.updateSuccess" : "form.success") : null}
+        />
+
+        <div className={styles.actions}>
+          {initialCourse && (
+            <Button type="button" variant="secondary" onClick={onCancel}>
+              {t("form.cancelLabel")}
+            </Button>
+          )}
+          <Button type="submit" isLoading={isSubmitting}>
+            {t(initialCourse ? "form.updateSubmitLabel" : "form.submitLabel")}
+          </Button>
+        </div>
+      </form>
+    </section>
   );
 }

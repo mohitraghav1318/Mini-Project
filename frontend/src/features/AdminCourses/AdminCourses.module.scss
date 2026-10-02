@@ -1,15 +1,68 @@
 .page {
   min-height: 100vh;
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 1.5rem;
   background: var(--color-bg);
 }
 
-.page h1 {
-  margin: 0;
-  color: var(--color-text);
+.container {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.loading {
-  margin: 2.5rem 2rem;
-  color: var(--color-text);
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    letter-spacing: -0.02em;
+  }
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--color-indigo);
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3rem;
+  justify-content: center;
+  color: var(--color-ink);
+  font-size: 1rem;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(36, 68, 107, 0.2);
+  border-top-color: var(--color-indigo);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

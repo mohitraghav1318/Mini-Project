@@ -1,6 +1,9 @@
 {
   "title": "Admin - Courses",
+  "subtitle": "Create and manage learning courses.",
   "form": {
+    "heading": "Create New Course",
+    "editHeading": "Edit Course",
     "titleLabel": "Course title",
     "titlePlaceholder": "Enter the course title",
     "descriptionLabel": "Description",

@@ -14,7 +14,16 @@ export default function AdminCourses() {
   const t = useTranslations(ADMIN_COURSES_NAMESPACE);
 
   if (isLoading) {
-    return <p className={styles.loading} role="status">{LOADING_MESSAGE}</p>;
+    return (
+      <main className={styles.page}>
+        <div className={styles.container}>
+          <div className={styles.loadingContainer} role="status">
+            <div className={styles.spinner} />
+            <p>{LOADING_MESSAGE}</p>
+          </div>
+        </div>
+      </main>
+    );
   }
 
   if (!user || user.role !== "ADMIN") {
@@ -27,9 +36,17 @@ export default function AdminCourses() {
 
   return (
     <main className={styles.page}>
-      <h1>{t("title")}</h1>
-      <CourseForm onSuccess={handleCourseCreated} />
-      <CourseList />
+      <div className={styles.container}>
+        <header className={styles.header}>
+          <h1>{t("title")}</h1>
+          <p className={styles.subtitle}>{t("subtitle")}</p>
+        </header>
+        <div className={styles.content}>
+          <CourseForm onSuccess={handleCourseCreated} />
+          <CourseList />
+        </div>
+      </div>
     </main>
   );
 }
+
