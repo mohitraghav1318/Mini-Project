@@ -6,5 +6,9 @@
   "cancel": "रद्द करें",
   "courses": "पाठ्यक्रम",
   "getStarted": "शुरू करें",
-  "logout": "लॉग आउट"
+  "logout": "लॉग आउट",
+  "login": "लॉग इन",
+  "dashboard": "डैशबोर्ड",
+  "adminPanel": "एडमिन पैनल",
+  "welcomeBack": "वापसी पर स्वागत है"
 }

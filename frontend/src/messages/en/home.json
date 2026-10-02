@@ -6,7 +6,10 @@
     "primary": "Join for free",
     "secondary": "Explore how it works",
     "statOne": "Free to join",
-    "statTwo": "Learn at your pace"
+    "statTwo": "Learn at your pace",
+    "exploreCourses": "Explore Courses",
+    "goToDashboard": "Go to Dashboard",
+    "welcomeUser": "Welcome back, {name}"
   },
   "how": {
     "eyebrow": "Simple by design",
@@ -44,7 +47,12 @@
   "cta": {
     "title": "You do not have to do it alone.",
     "description": "Join a community that is ready to learn, support, and grow with you.",
-    "button": "Create your free account"
+    "button": "Create your free account",
+    "exploreCourses": "Explore Courses",
+    "goToDashboard": "Go to Dashboard",
+    "loggedInTitle": "Continue your learning journey",
+    "loggedInDescription": "Explore skill courses, connect with your community, and keep growing."
   },
   "footer": "A community built by and for women in villages."
 }
+
