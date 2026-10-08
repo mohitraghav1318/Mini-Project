@@ -4,6 +4,11 @@
   "error": "Something went wrong. Please try again.",
   "save": "Save",
   "cancel": "Cancel",
+  "courses": "Courses",
   "getStarted": "Get Started",
-  "logout": "Log out"
+  "logout": "Log out",
+  "login": "Log in",
+  "dashboard": "Dashboard",
+  "adminPanel": "Admin Panel",
+  "welcomeBack": "Welcome back"
 }

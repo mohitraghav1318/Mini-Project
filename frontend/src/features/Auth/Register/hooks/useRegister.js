@@ -16,7 +16,7 @@ const initialForm = {
   occupation: "",
 };
 
-export function useRegister() {
+export function useRegister({ redirectTo } = {}) {
   const router = useRouter();
   const { refreshUser } = useAuth();
   const tErrors = useTranslations("register.errors");
@@ -92,7 +92,7 @@ export function useRegister() {
     try {
       await registerUser(form);
       await refreshUser();
-      router.push("/dashboard");
+      router.push(redirectTo || "/dashboard");
     } catch (err) {
       setFormError(err.message || "Registration failed");
     } finally {

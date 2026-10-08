@@ -8,7 +8,10 @@ import { isUserEnrolled } from "../services/enrollment.service.js";
 export const listCourses = asyncHandler(async (req, res) => {
   const courses = await prisma.course.findMany({
     orderBy: { createdAt: "desc" },
-    include: { lessons: true },
+    include: {
+      lessons: true,
+      _count: { select: { enrollments: true } },
+    },
   });
 
   return res.status(200).json({
@@ -342,6 +345,41 @@ export const unenrollFromCourse = asyncHandler(async (req, res) => {
   return res.status(200).json({
     success: true,
     message: "Enrollment removed successfully.",
+  });
+});
+
+export const getAdminStats = asyncHandler(async (req, res) => {
+  const [totalCourses, totalEnrollments, courses] = await Promise.all([
+    prisma.course.count(),
+    prisma.enrollment.count(),
+    prisma.course.findMany({
+      select: {
+        id: true,
+        title: true,
+        category: true,
+        _count: { select: { enrollments: true } },
+      },
+      orderBy: { createdAt: "desc" },
+    }),
+  ]);
+
+  const totalUniqueEnrolledUsers = await prisma.enrollment
+    .groupBy({ by: ["userId"] })
+    .then((groups) => groups.length);
+
+  return res.status(200).json({
+    success: true,
+    data: {
+      totalCourses,
+      totalEnrollments,
+      totalUniqueEnrolledUsers,
+      courses: courses.map((c) => ({
+        id: c.id,
+        title: c.title,
+        category: c.category,
+        enrollmentCount: c._count.enrollments,
+      })),
+    },
   });
 });
 

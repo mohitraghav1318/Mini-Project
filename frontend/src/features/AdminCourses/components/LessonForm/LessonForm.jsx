@@ -20,26 +20,31 @@ export default function LessonForm({ courseId, initialLesson, onSuccess, onCance
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
-      <Input
-        name="title"
-        label={t("lessonForm.titleLabel")}
-        type="text"
-        placeholder={t("lessonForm.titlePlaceholder")}
-        required
-        value={form.title}
-        onChange={handleChange}
-      />
+      <div className={styles.formGrid}>
+        <div className={styles.titleField}>
+          <Input
+            name="title"
+            label={t("lessonForm.titleLabel")}
+            type="text"
+            placeholder={t("lessonForm.titlePlaceholder")}
+            required
+            value={form.title}
+            onChange={handleChange}
+          />
+        </div>
 
-      <Input
-        name="order"
-        label={t("lessonForm.orderLabel")}
-        type="number"
-        placeholder={t("lessonForm.orderPlaceholder")}
-        required
-        min="1"
-        value={form.order}
-        onChange={handleChange}
-      />
+        <div className={styles.orderField}>
+          <Input
+            name="order"
+            label={t("lessonForm.orderLabel")}
+            type="number"
+            placeholder={t("lessonForm.orderPlaceholder")}
+            required
+            value={form.order}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
 
       <Input
         name="youtubeUrl"
@@ -57,14 +62,16 @@ export default function LessonForm({ courseId, initialLesson, onSuccess, onCance
         message={success ? t(initialLesson ? "lessonForm.updateSuccess" : "lessonForm.success") : null}
       />
 
-      <Button type="submit" isLoading={isSubmitting} fullWidth>
-        {t(initialLesson ? "lessonForm.updateSubmitLabel" : "lessonForm.submitLabel")}
-      </Button>
-      {initialLesson && (
-        <Button type="button" variant="secondary" onClick={onCancel} fullWidth>
-          {t("lessonForm.cancelLabel")}
+      <div className={styles.actions}>
+        {onCancel && (
+          <Button type="button" variant="secondary" onClick={onCancel}>
+            {t("lessonForm.cancelLabel")}
+          </Button>
+        )}
+        <Button type="submit" isLoading={isSubmitting}>
+          {t(initialLesson ? "lessonForm.updateSubmitLabel" : "lessonForm.submitLabel")}
         </Button>
-      )}
+      </div>
     </form>
   );
 }

@@ -54,3 +54,7 @@ export function deleteLesson(courseId, lessonId) {
     method: "DELETE",
   });
 }
+
+export function getAdminStats() {
+  return apiFetch("/api/courses/admin/stats", { method: "GET" });
+}
