@@ -4,6 +4,48 @@
   gap: 1rem;
 }
 
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.label {
+  color: var(--color-indigo);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.textarea {
+  min-height: 7rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--color-border, rgba(43, 38, 32, 0.12));
+  border-radius: var(--radius-sm, 8px);
+  background: var(--color-cotton, #ffffff);
+  color: var(--color-ink, #2b2620);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-indigo);
+    box-shadow: 0 0 0 3px rgba(36, 68, 107, 0.12);
+  }
+
+  &::placeholder {
+    color: #94a3b8;
+  }
+}
+
+.charCount {
+  align-self: flex-end;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
 .formGrid {
   display: grid;
   grid-template-columns: 1fr 140px;

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { createCourse, updateCourse } from "@/lib/courseApi";
+import { mergeOutlineIntoDescription } from "../../AiAssistant/outlineToCourse";
 
 const initialForm = {
   title: "",
@@ -16,6 +17,12 @@ export function useCourseForm(initialCourse, onSuccess) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  // Synchronous mirror of the form so Apply can merge against the latest
+  // description even if a render has not flushed yet.
+  const formRef = useRef(form);
+  useEffect(() => {
+    formRef.current = form;
+  }, [form]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -56,5 +63,36 @@ export function useCourseForm(initialCourse, onSuccess) {
     handleChange,
     handleCategoryChange,
     handleSubmit,
+    applyGenerated,
+    applyOutlineEdit,
   };
+
+  function applyGenerated(generated) {
+    if (!generated) return;
+    setForm((current) => ({
+      ...current,
+      ...(generated.title !== undefined && { title: generated.title }),
+      ...(generated.description !== undefined && { description: generated.description }),
+      ...(generated.category ? { category: generated.category } : {}),
+    }));
+    setError(null);
+    setSuccess(false);
+  }
+
+  // Edit-mode apply: merges the outline into the live description,
+  // optionally takes the suggested title, and never touches the category
+  // or any lesson. Returns { replaced } for the managed-section notice.
+  function applyOutlineEdit({ outline, draft, updateTitle }) {
+    if (!outline) return { replaced: false };
+    const current = formRef.current || {};
+    const merged = mergeOutlineIntoDescription(current.description || "", outline, draft);
+    setForm({
+      ...current,
+      ...(updateTitle && draft?.title ? { title: draft.title } : {}),
+      description: merged.description,
+    });
+    setError(null);
+    setSuccess(false);
+    return { replaced: merged.replaced };
+  }
 }

@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import Button from "@/components/Button/Button";
 import FormMessage from "@/components/FormMessage/FormMessage";
 import Input from "@/components/Input/Input";
+import NotesUpload from "./components/NotesUpload/NotesUpload";
 import styles from "./LessonForm.module.scss";
 import { useLessonForm } from "./hooks/useLessonForm";
 
@@ -16,6 +17,7 @@ export default function LessonForm({ courseId, initialLesson, onSuccess, onCance
     isSubmitting,
     handleChange,
     handleSubmit,
+    applyNotes,
   } = useLessonForm(courseId, initialLesson, onSuccess);
 
   return (
@@ -55,6 +57,27 @@ export default function LessonForm({ courseId, initialLesson, onSuccess, onCance
         value={form.youtubeUrl}
         onChange={handleChange}
       />
+
+      <NotesUpload courseId={courseId} onExtracted={applyNotes} />
+
+      <div className={styles.fieldGroup}>
+        <label className={styles.label} htmlFor="lesson-content">
+          {t("lessonForm.notesLabel")}
+        </label>
+        <textarea
+          id="lesson-content"
+          name="content"
+          className={styles.textarea}
+          placeholder={t("lessonForm.notesPlaceholder")}
+          value={form.content || ""}
+          onChange={handleChange}
+          rows={5}
+          maxLength={5000}
+        />
+        <span className={styles.charCount}>
+          {(form.content || "").length} / 5000
+        </span>
+      </div>
 
       <FormMessage type="error" message={error} />
       <FormMessage

@@ -21,6 +21,8 @@ import { OCCUPATION_KEYS } from "@/features/Auth/Register/data/register.data";
 import styles from "./CourseDetail.module.scss";
 import { useCourseDetail } from "./hooks/useCourseDetail";
 import { useCourseEnrollment } from "./hooks/useCourseEnrollment";
+import CourseDescription from "./components/CourseDescription/CourseDescription";
+import DoubtBot from "./components/DoubtBot/DoubtBot";
 
 export default function CourseDetail({ courseId }) {
   const t = useTranslations("courses");
@@ -118,7 +120,7 @@ export default function CourseDetail({ courseId }) {
               </div>
               <h1 className={styles.courseTitle}>{course.title}</h1>
               {course.description && (
-                <p className={styles.courseDescription}>{course.description}</p>
+                <CourseDescription description={course.description} />
               )}
 
               <div className={styles.metaRow}>
@@ -248,6 +250,8 @@ export default function CourseDetail({ courseId }) {
             <p>{t("detail.noLessons")}</p>
           </div>
         )}
+
+        {(user?.role === "ADMIN" || isEnrolled) && <DoubtBot courseId={courseId} />}
       </div>
     </main>
   );

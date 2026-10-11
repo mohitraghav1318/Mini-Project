@@ -6,6 +6,7 @@ import FormMessage from "@/components/FormMessage/FormMessage";
 import Input from "@/components/Input/Input";
 import SearchableSelect from "@/components/SearchableSelect/SearchableSelect";
 import { OCCUPATION_KEYS } from "@/features/Auth/Register/data/register.data";
+import AiCourseAssistant from "../AiAssistant/AiCourseAssistant";
 import styles from "./CourseForm.module.scss";
 import { useCourseForm } from "./hooks/useCourseForm";
 
@@ -20,6 +21,8 @@ export default function CourseForm({ initialCourse, onSuccess, onCancel }) {
     handleChange,
     handleCategoryChange,
     handleSubmit,
+    applyGenerated,
+    applyOutlineEdit,
   } = useCourseForm(initialCourse, onSuccess);
 
   const occupationOptions = OCCUPATION_KEYS.map((key) => ({
@@ -27,8 +30,22 @@ export default function CourseForm({ initialCourse, onSuccess, onCancel }) {
     label: tOccupations(key),
   }));
 
+  function handleOutlineEdit(payload) {
+    return applyOutlineEdit(payload);
+  }
+
   return (
-    <section className={styles.cardPanel}>
+    <>
+      {initialCourse ? (
+        <AiCourseAssistant
+          mode="edit"
+          initialCourse={initialCourse}
+          onApply={handleOutlineEdit}
+        />
+      ) : (
+        <AiCourseAssistant onApply={applyGenerated} />
+      )}
+      <section className={styles.cardPanel}>
       <div className={styles.cardHeader}>
         <h2>{t(initialCourse ? "form.editHeading" : "form.heading")}</h2>
       </div>
@@ -95,6 +112,7 @@ export default function CourseForm({ initialCourse, onSuccess, onCancel }) {
           </Button>
         </div>
       </form>
-    </section>
+      </section>
+    </>
   );
 }

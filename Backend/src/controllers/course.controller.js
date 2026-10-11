@@ -5,6 +5,20 @@ import { VALID_OCCUPATIONS } from "../constants/occupations.js";
 import { fetchYoutubeMetadata, parseYoutubeVideoId } from "../utils/youtube.js";
 import { isUserEnrolled } from "../services/enrollment.service.js";
 
+const MAX_LESSON_CONTENT = 5000;
+
+// Optional lesson notes used as grounded context for the AI doubt bot.
+// Empty strings clear the field; over-long input is rejected.
+function parseLessonContent(content) {
+  if (typeof content !== "string") {
+    throw new ApiError(400, "Lesson content must be text.");
+  }
+  if (content.trim().length > MAX_LESSON_CONTENT) {
+    throw new ApiError(400, `Lesson content must be at most ${MAX_LESSON_CONTENT} characters long.`);
+  }
+  return content.trim() ? content.trim() : null;
+}
+
 export const listCourses = asyncHandler(async (req, res) => {
   const courses = await prisma.course.findMany({
     orderBy: { createdAt: "desc" },
@@ -74,7 +88,7 @@ export const createCourse = asyncHandler(async (req, res) => {
 
 export const createLesson = asyncHandler(async (req, res) => {
   const courseId = Number(req.params.courseId);
-  const { title, order, youtubeUrl } = req.body;
+  const { title, order, youtubeUrl, content } = req.body;
 
   if (!Number.isInteger(courseId)) {
     throw new ApiError(404, "Course not found.");
@@ -107,6 +121,7 @@ export const createLesson = asyncHandler(async (req, res) => {
       youtubeUrl,
       videoId,
       thumbnailUrl,
+      ...(content !== undefined && { content: parseLessonContent(content) }),
     },
   });
 
@@ -191,7 +206,7 @@ export const deleteCourse = asyncHandler(async (req, res) => {
 export const updateLesson = asyncHandler(async (req, res) => {
   const courseId = Number(req.params.courseId);
   const lessonId = Number(req.params.lessonId);
-  const { title, youtubeUrl } = req.body;
+  const { title, youtubeUrl, content } = req.body;
 
   if (!Number.isInteger(courseId) || !Number.isInteger(lessonId)) {
     throw new ApiError(404, "Course or lesson not found.");
@@ -205,7 +220,7 @@ export const updateLesson = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Course or lesson not found.");
   }
 
-  if (title === undefined && youtubeUrl === undefined) {
+  if (title === undefined && youtubeUrl === undefined && content === undefined) {
     throw new ApiError(400, "At least one lesson field is required.");
   }
 
@@ -215,6 +230,7 @@ export const updateLesson = asyncHandler(async (req, res) => {
 
   const data = {
     ...(title !== undefined && { title }),
+    ...(content !== undefined && { content: parseLessonContent(content) }),
   };
 
   if (youtubeUrl !== undefined) {

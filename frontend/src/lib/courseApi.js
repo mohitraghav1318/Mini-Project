@@ -1,4 +1,4 @@
-import { apiFetch } from "./api";
+import { apiFetch, apiFetchForm } from "./api";
 
 export function createCourse(payload) {
   return apiFetch("/api/courses", {
@@ -53,6 +53,12 @@ export function deleteLesson(courseId, lessonId) {
   return apiFetch(`/api/courses/${courseId}/lessons/${lessonId}`, {
     method: "DELETE",
   });
+}
+
+export function extractLessonNotes(courseId, file) {
+  const formData = new FormData();
+  formData.append("file", file);
+  return apiFetchForm(`/api/courses/${courseId}/lessons/notes/extract`, formData);
 }
 
 export function getAdminStats() {

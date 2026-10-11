@@ -24,3 +24,21 @@ export const forgotPasswordLimiter = buildLimiter({
   max: 3,
   message: "Too many password reset requests. Please try again in 15 minutes.",
 });
+
+export const aiLimiter = buildLimiter({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 10,
+  message: "Too many AI requests. Please try again later.",
+});
+
+export const askLimiter = buildLimiter({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 20,
+  message: "Too many questions. Please try again later.",
+});
+
+export const notesLimiter = buildLimiter({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 20,
+  message: "Too many upload requests. Please try again later.",
+});

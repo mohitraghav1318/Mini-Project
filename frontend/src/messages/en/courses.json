@@ -26,10 +26,32 @@
     "unenroll": "Unenroll from Course",
     "adminCannotEnroll": "Enrollment Unavailable",
     "adminEnrollHint": "Admins cannot enroll in courses.",
+    "descObjectives": "Learning objectives",
+    "descLessonPlan": "Lesson plan",
+    "descTakeaways": "Key takeaways",
+    "descHindi": "हिन्दी में",
     "enrollmentErrors": {
       "load": "We couldn't check your enrollment. Please try again.",
       "enroll": "We couldn't enroll you in this course. Please try again.",
       "unenroll": "We couldn't remove your enrollment. Please try again."
     }
+  },
+  "doubtBot": {
+    "heading": "Course Doubt Bot",
+    "askLabel": "Ask AI",
+    "hideLabel": "Hide",
+    "hint": "Ask a question about this course's lessons. Answers come only from the available lesson notes.",
+    "empty": "No questions yet. Ask your first question below.",
+    "inputPlaceholder": "Type your question about this course...",
+    "sendLabel": "Ask",
+    "thinking": "Thinking...",
+    "languageLabel": "Answer language",
+    "languageHi": "Hindi",
+    "languageEn": "English",
+    "aiBadge": "AI-generated",
+    "sourcesLabel": "Based on",
+    "communityLink": "Ask in the course community",
+    "retryLabel": "Try again",
+    "error": "Could not get an answer. Please try again."
   }
 }

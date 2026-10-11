@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { OCCUPATION_KEYS } from "@/features/Auth/Register/data/register.data";
 import CourseForm from "@/features/AdminCourses/components/CourseForm/CourseForm";
 import LessonForm from "@/features/AdminCourses/components/LessonForm/LessonForm";
+import CourseDescription from "@/features/CourseDetail/components/CourseDescription/CourseDescription";
 import { useAdminCourses } from "@/features/AdminCourses/hooks/useAdminCourses";
 import { deleteLesson } from "@/lib/courseApi";
 import styles from "./AdminCourseDetail.module.scss";
@@ -152,7 +153,7 @@ export default function AdminCourseDetail({ courseId }) {
             </div>
 
             {course.description && (
-              <p className={styles.description}>{course.description}</p>
+              <CourseDescription description={course.description} />
             )}
           </div>
 

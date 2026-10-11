@@ -7,6 +7,7 @@ import interestRoutes from "./routes/interest.routes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import courseRoutes from "./routes/course.routes.js";
 import communityRoutes from "./routes/community.routes.js";
+import aiRoutes from "./routes/ai.routes.js";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -30,6 +31,7 @@ app.use("/api/interests", interestRoutes);
 
 app.use("/api/courses", courseRoutes);
 app.use("/api", communityRoutes);
+app.use("/api/admin/ai", aiRoutes);
 
 app.get("/", (req, res) => {
   res.send("Rural Women Helper API is running.");

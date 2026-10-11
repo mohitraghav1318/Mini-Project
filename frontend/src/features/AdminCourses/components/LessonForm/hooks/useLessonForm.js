@@ -8,6 +8,7 @@ const initialForm = {
   title: "",
   order: "",
   youtubeUrl: "",
+  content: "",
 };
 
 export function useLessonForm(courseId, initialLesson, onSuccess) {
@@ -20,6 +21,11 @@ export function useLessonForm(courseId, initialLesson, onSuccess) {
   function handleChange(event) {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+    setSuccess(false);
+  }
+
+  function applyNotes(text) {
+    setForm((current) => ({ ...current, content: text }));
     setSuccess(false);
   }
 
@@ -51,5 +57,6 @@ export function useLessonForm(courseId, initialLesson, onSuccess) {
     isSubmitting,
     handleChange,
     handleSubmit,
+    applyNotes,
   };
 }
