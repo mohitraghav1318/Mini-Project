@@ -116,7 +116,33 @@ function expandLine(line, markers) {
     if (rest && rest.trim()) out.push(rest);
     else if (rest && !rest.trim() && out.length === 0) out.push(rest);
   }
-  return out.filter((c, i) => c.trim() || i === 0);
+  // Preserve blank-line separation: an input line that yields no chunks
+  // still emits one empty chunk so the main loop flushes open blocks.
+  return out.length > 0 ? out.filter((c, i) => c.trim() || i === 0) : [""];
+}
+
+// Derives a clean one-snippet card preview from a description without
+// modifying the saved text. Returns the first substantial English (or
+// preferred-language) intro paragraph: no markers, no Hindi section on
+// English cards, no objectives/plan/takeaways/quiz sections. A leading
+// stub line (e.g. a bare "Stitching Course" title prefix) is skipped when
+// more intro text follows. Returns "" when there is nothing usable.
+export function getDescriptionPreview(description, options = {}) {
+  const { lang = "en", markers = [] } = options;
+  if (typeof description !== "string" || !description.trim()) return "";
+  const paras = parseDescription(description, markers).filter(
+    (block) => block.kind === "paragraph" && block.text.trim()
+  );
+  const pick = (wanted) => {
+    const list = paras.filter((p) => p.lang === wanted);
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].text.trim().length >= 30 || i === list.length - 1) {
+        return list[i].text;
+      }
+    }
+    return "";
+  };
+  return (pick(lang) || pick("en") || pick("hi") || "").replace(/\s+/g, " ").trim();
 }
 
 // Returns an array of blocks:

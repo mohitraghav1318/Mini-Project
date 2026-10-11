@@ -1,15 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Button from "@/components/Button/Button";
 import FormMessage from "@/components/FormMessage/FormMessage";
 import SearchableSelect from "@/components/SearchableSelect/SearchableSelect";
 import { useRouter } from "@/i18n/navigation";
 import { OCCUPATION_KEYS } from "@/features/Auth/Register/data/register.data";
 import { deleteCourse } from "@/lib/courseApi";
+import { MANAGED_START, MANAGED_END } from "@/features/AdminCourses/components/AiAssistant/outlineToCourse";
+import { getDescriptionPreview } from "@/features/CourseDetail/components/CourseDescription/parseDescription";
 import styles from "./CourseList.module.scss";
 import { useCourseList } from "./hooks/useCourseList";
+
+const PREVIEW_MARKERS = [MANAGED_START, MANAGED_END];
 
 export default function CourseList({ refreshTrigger }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -18,6 +22,7 @@ export default function CourseList({ refreshTrigger }) {
   const [actionSuccess, setActionSuccess] = useState(null);
   const router = useRouter();
   const t = useTranslations("adminCourses");
+  const locale = useLocale();
   const tOccupations = useTranslations("occupations");
   const { courses, setCourses, isLoading, error } = useCourseList(refreshTrigger);
 
@@ -115,6 +120,12 @@ export default function CourseList({ refreshTrigger }) {
             const category = OCCUPATION_KEYS.includes(course.category)
               ? tOccupations(course.category)
               : course.category;
+            // Clean one-snippet preview: intro text only, never the raw
+            // AI-managed description. The saved description is untouched.
+            const preview = getDescriptionPreview(course.description, {
+              lang: locale === "hi" ? "hi" : "en",
+              markers: PREVIEW_MARKERS,
+            });
 
             return (
               <article className={styles.card} key={course.id}>
@@ -122,9 +133,9 @@ export default function CourseList({ refreshTrigger }) {
                   <h3 className={styles.courseTitle}>{course.title}</h3>
                   <span className={styles.categoryBadge}>{category}</span>
                 </div>
-                
-                {course.description && (
-                  <p className={styles.courseDescription}>{course.description}</p>
+
+                {preview && (
+                  <p className={styles.courseDescription}>{preview}</p>
                 )}
 
                 <div className={styles.metaRow}>

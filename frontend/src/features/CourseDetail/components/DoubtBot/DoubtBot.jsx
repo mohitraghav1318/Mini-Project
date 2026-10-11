@@ -23,6 +23,7 @@ export default function DoubtBot({ courseId }) {
     setLanguage,
     handleSubmit,
     handleRetry,
+    clearChat,
   } = useDoubtBot(courseId);
 
   return (
@@ -35,6 +36,11 @@ export default function DoubtBot({ courseId }) {
         <Button type="button" variant="secondary" onClick={toggle}>
           {t(isOpen ? "doubtBot.hideLabel" : "doubtBot.askLabel")}
         </Button>
+        {isOpen && messages.length > 0 && (
+          <Button type="button" variant="secondary" onClick={clearChat} disabled={isAsking}>
+            {t("doubtBot.clearLabel")}
+          </Button>
+        )}
       </div>
 
       {isOpen && (
@@ -64,6 +70,9 @@ export default function DoubtBot({ courseId }) {
                   <div className={styles.aiContent}>
                     <span className={styles.aiBadge}>{t("doubtBot.aiBadge")}</span>
                     <p>{message.text}</p>
+                    {message.answerKind === "general" && (
+                      <p className={styles.sources}>{t("doubtBot.generalLabel")}</p>
+                    )}
                     {message.grounded && message.sources?.length > 0 && (
                       <p className={styles.sources}>
                         {t("doubtBot.sourcesLabel")}:{" "}

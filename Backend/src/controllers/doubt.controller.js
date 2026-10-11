@@ -2,7 +2,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import prisma from "../config/db.js";
 import { isUserEnrolled } from "../services/enrollment.service.js";
-import { answerDoubt, noContentFallback, selectLessonContext } from "../services/doubtBot.service.js";
+import { answerTutor, sanitizeHistory, selectLessonContext } from "../services/doubtBot.service.js";
 
 const VALID_LANGUAGES = ["hi", "en"];
 const MIN_QUESTION = 3;
@@ -30,6 +30,8 @@ export const askDoubt = asyncHandler(async (req, res) => {
     select: {
       id: true,
       title: true,
+      category: true,
+      description: true,
       lessons: {
         select: { id: true, title: true, order: true, content: true },
         orderBy: { order: "asc" },
@@ -43,7 +45,7 @@ export const askDoubt = asyncHandler(async (req, res) => {
 
   await requireCourseAccess(req.user, courseId);
 
-  const { question, language = "hi" } = req.body ?? {};
+  const { question, language = "hi", history } = req.body ?? {};
 
   const errors = [];
   if (typeof question !== "string" || question.trim().length < MIN_QUESTION) {
@@ -58,26 +60,19 @@ export const askDoubt = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid question.", errors);
   }
 
+  // sanitizeHistory throws ApiError(400) on malformed history.
+  const cleanHistory = sanitizeHistory(history);
+
   const trimmedQuestion = question.trim();
-  const { excerpts } = selectLessonContext(course.lessons, trimmedQuestion);
+  const { excerpts, matched } = selectLessonContext(course.lessons, trimmedQuestion);
 
-  if (excerpts.length === 0) {
-    return res.status(200).json({
-      success: true,
-      data: {
-        answer: noContentFallback(language),
-        language,
-        grounded: false,
-        sources: [],
-      },
-    });
-  }
-
-  const answer = await answerDoubt({
-    courseTitle: course.title,
+  const { answer, answerKind } = await answerTutor({
+    course,
     excerpts,
+    matchedNotes: matched,
     question: trimmedQuestion,
     language,
+    history: cleanHistory,
   });
 
   return res.status(200).json({
@@ -85,8 +80,12 @@ export const askDoubt = asyncHandler(async (req, res) => {
     data: {
       answer,
       language,
-      grounded: true,
-      sources: excerpts.map(({ lessonId, order, title }) => ({ lessonId, order, title })),
+      grounded: answerKind !== "general",
+      answerKind,
+      sources:
+        answerKind === "general"
+          ? []
+          : excerpts.map(({ lessonId, order, title }) => ({ lessonId, order, title })),
     },
   });
 });

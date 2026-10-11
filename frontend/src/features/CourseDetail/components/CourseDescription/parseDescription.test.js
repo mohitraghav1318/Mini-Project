@@ -2,7 +2,7 @@
 // Run with: node --test src/features/CourseDetail/components/CourseDescription/parseDescription.test.js
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { parseDescription, HINDI_SEPARATOR } from "./parseDescription.js";
+import { parseDescription, getDescriptionPreview, HINDI_SEPARATOR } from "./parseDescription.js";
 
 const START = "----- AI course outline (generated, editable) -----";
 const END = "----- End of AI course outline -----";
@@ -177,4 +177,61 @@ describe("flattened legacy format (newline loss)", () => {
     assert.deepEqual(blocks[0].items, ["Cut the cloth", "Stitch slowly"]);
   });
 });
+});
+
+describe("getDescriptionPreview", () => {
+  const OPTS = { markers: MARKERS };
+
+  it("1. returns plain-text descriptions unchanged", () => {
+    assert.equal(
+      getDescriptionPreview("Learn stitching basics step by step.", OPTS),
+      "Learn stitching basics step by step."
+    );
+  });
+
+  it("2. strips inline AI markers", () => {
+    const text = getDescriptionPreview(
+      `Stitching Course ${START} This course teaches stitching. ${END}`,
+      OPTS
+    );
+    assert.ok(!text.includes("AI course outline"));
+    assert.ok(text.includes("teaches stitching"));
+  });
+
+  it("3. excludes the Hindi section on English cards", () => {
+    const text = getDescriptionPreview(
+      `English intro line here for learners.\n\n${HINDI_SEPARATOR}\nयह हिंदी विवरण है जो लंबा है।`,
+      OPTS
+    );
+    assert.ok(text.includes("English intro"));
+    assert.ok(!text.includes("हिंदी"));
+  });
+
+  it("4. excludes objectives, lesson plan, and takeaways", () => {
+    const text = getDescriptionPreview(RICH, OPTS);
+    assert.equal(text, "A simple guide to making papads at home.");
+    assert.ok(!text.includes("Learning objectives"));
+    assert.ok(!text.includes("Lesson plan"));
+    assert.ok(!text.includes("Key takeaways"));
+    assert.ok(!text.includes("Quick quiz"));
+  });
+
+  it("5. skips a stub prefix like 'Stitching Course'", () => {
+    const text = getDescriptionPreview(
+      `Stitching Course\n\n${START}\n\nThis course teaches rural women tailoring skills for income.\n\n${END}`,
+      OPTS
+    );
+    assert.ok(text.includes("teaches rural women"));
+    assert.ok(!text.startsWith("Stitching Course"));
+  });
+
+  it("6. handles empty and malformed descriptions", () => {
+    for (const bad of ["", "   ", null, undefined, 42, {}, []]) {
+      assert.equal(getDescriptionPreview(bad, OPTS), "");
+    }
+    // Hindi-only description still yields a preview rather than nothing.
+    assert.ok(
+      getDescriptionPreview("यह केवल हिंदी में लिखा गया विवरण है।", OPTS).length > 0
+    );
+  });
 });

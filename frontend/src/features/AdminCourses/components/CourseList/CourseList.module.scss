@@ -133,6 +133,7 @@
   font-size: 1.15rem;
   font-weight: 700;
   line-height: 1.3;
+  min-height: calc(1.3em * 2);
 }
 
 .categoryBadge {
@@ -157,6 +158,7 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  overflow-wrap: break-word;
 }
 
 .metaRow {
